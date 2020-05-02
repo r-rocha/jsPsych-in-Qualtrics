@@ -77,16 +77,4 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 Qualtrics.SurveyEngine.addOnUnload(function () {
     /*Place your JavaScript here to run when the page is unloaded*/
 
-    var trials = jsPsych.data.get().filter({
-        test_part: 'test'
-    });
-    var correct_trials = trials.filter({
-        correct: true
-    });
-    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-    var rt = Math.round(correct_trials.select('rt').mean());
-
-    console.log(accuracy);
-    console.log(rt);
-
 });
