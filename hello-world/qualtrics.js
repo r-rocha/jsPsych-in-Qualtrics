@@ -1,6 +1,6 @@
 Qualtrics.SurveyEngine.addOnload(function () {
 
-	/*Place your JavaScript here to run when the page loads*/
+    /*Place your JavaScript here to run when the page loads*/
 
     var jslib_url = "https://kywch.github.io/jsPsych-in-Qualtrics/";
 
@@ -33,8 +33,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     // set the display stage, which is defined in css
     // jQuery is loaded in Qualtrics by default
-    jQuery('<div class = display_stage_background></div>').appendTo('body');
-    jQuery('<div class = display_stage></div>').appendTo('body');
+    jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
+    jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
     function initExp() {
 
@@ -45,32 +45,25 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
         jsPsych.init({
             timeline: [hello_trial],
-
-            display_element: document.querySelector('.display_stage'),
-
+            display_element: 'display_stage',
             on_finish: function (data) {
+                // clear the stage
+                jQuery('display_stage').remove();
+                jQuery('display_stage_background').remove();
 
                 // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
                 qthis.clickNextButton();
-
-                // clear the stage
-                jQuery('.display_stage').remove();
-                jQuery('.display_stage_background').remove();
             }
         });
-
     }
+});
+
+Qualtrics.SurveyEngine.addOnReady(function () {
+    /*Place your JavaScript here to run when the page is fully displayed*/
 
 });
 
-Qualtrics.SurveyEngine.addOnReady(function()
-{
-	/*Place your JavaScript here to run when the page is fully displayed*/
-
-});
-
-Qualtrics.SurveyEngine.addOnUnload(function()
-{
-	/*Place your JavaScript here to run when the page is unloaded*/
+Qualtrics.SurveyEngine.addOnUnload(function () {
+    /*Place your JavaScript here to run when the page is unloaded*/
 
 });
