@@ -7,6 +7,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
     var requiredResources = [
         jslib_url + "jspsych.js",
         jslib_url + "plugins/jspsych-html-keyboard-response.js",
+        jslib_url + "plugins/jspsych-image-keyboard-response.js",
         jslib_url + "rt-task_main.js"
     ];
 
@@ -39,18 +40,27 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     function initExp() {
 
-        var hello_trial = {
-            type: 'html-keyboard-response',
-            stimulus: 'Hello world!'
-        }
-
         jsPsych.init({
-            timeline: [hello_trial],
+            timeline: timeline,
             display_element: 'display_stage',
             on_finish: function (data) {
                 // clear the stage
                 jQuery('display_stage').remove();
                 jQuery('display_stage_background').remove();
+
+                // summarize the results
+                var trials = jsPsych.data.get().filter({
+                    test_part: 'test'
+                });
+                var correct_trials = trials.filter({
+                    correct: true
+                });
+                var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+                var rt = Math.round(correct_trials.select('rt').mean());
+
+                // save to qualtrics embedded data
+                Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
+                Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
 
                 // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
                 qthis.clickNextButton();
@@ -66,5 +76,17 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 
 Qualtrics.SurveyEngine.addOnUnload(function () {
     /*Place your JavaScript here to run when the page is unloaded*/
+
+    var trials = jsPsych.data.get().filter({
+        test_part: 'test'
+    });
+    var correct_trials = trials.filter({
+        correct: true
+    });
+    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+    var rt = Math.round(correct_trials.select('rt').mean());
+
+    console.log(accuracy);
+    console.log(rt);
 
 });
