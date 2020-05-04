@@ -9,7 +9,7 @@ If you are looking for Qualtrics tutorials, there are other excellent tutorials 
 * [CSULB Qualtrics Guide](https://csulb.libguides.com/qualtrics/)
 * [UNTHSC Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/)
 
-If you are looking for jsPsych tutorial, the best place to start is [the jsPsych Hello World! tutorial](https://www.jspsych.org/tutorials/hello-world/). You can also look at [the YouTube tutorial from Josh de Leeuw](https://www.youtube.com/playlist?list=PLnfo1lBY1P2Mf_o6rV5wiqqn92Mw3UTGh).
+If you are looking for jsPsych tutorial, the best place to start is [the jsPsych Hello World! tutorial](https://www.jspsych.org/tutorials/hello-world/). You should also look at [the YouTube tutorial from Josh de Leeuw](https://www.youtube.com/playlist?list=PLnfo1lBY1P2Mf_o6rV5wiqqn92Mw3UTGh).
 
 ## jsPsych in Qualtrics Tutorial Series
 

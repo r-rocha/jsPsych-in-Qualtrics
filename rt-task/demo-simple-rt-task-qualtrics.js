@@ -2,14 +2,14 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     /*Place your JavaScript here to run when the page loads*/
 
-    /* Change 2: Hide the Next button */
+    /* Change 1: Hide the Next button */
     // Retrieve Qualtrics object and save in qthis
     var qthis = this;
 
     // Hide buttons
     qthis.hideNextButton();
 
-    /* Change 3: Define and load required resources */
+    /* Change 2: Define and load required resources */
     var task_github = "https://kywch.github.io/Simple-RT-Task/"; // https://<your-github-username>.github.io/<your-experiment-name>
 
     // requiredResources must include all the JS files that demo-simple-rt-task-transformed.html uses.
@@ -35,19 +35,19 @@ Qualtrics.SurveyEngine.addOnload(function () {
         loadScript(0);
     }
 
-    /* Change 4: Append the display_stage Div using jQuery */
+    /* Change 3: Append the display_stage Div using jQuery */
     // jQuery is loaded in Qualtrics by default
     jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
     jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
-    /* Change 5: Wrap jsPsych.init() in a function */
+    /* Change 4: Wrap jsPsych.init() in a function */
     function initExp() {
 
         jsPsych.init({
             timeline: timeline,
             display_element: 'display_stage',
             on_finish: function (data) {
-                /* Change 6: Summarize and save the results to Qualtrics */
+                /* Change 5: Summarize and save the results to Qualtrics */
                 // summarize the results
                 var trials = jsPsych.data.get().filter({
                     test_part: 'test'
@@ -62,7 +62,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
                 Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
                 Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
 
-                /* Change 7: Add the clean up and continue functions.*/
+                /* Change 6: Add the clean up and continue functions.*/
                 // clear the stage
                 jQuery('display_stage').remove();
                 jQuery('display_stage_background').remove();

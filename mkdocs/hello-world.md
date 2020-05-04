@@ -43,13 +43,13 @@ When you open `experiment.html` in a browser, you should see "Hello world!" prin
 
 ## First transformation: `experiment-with-display-element.html`
 
-The `experiment-with-display-element.html` file in this repository contains three changes from the `experiment.html`. When you open `experiment-with-display-element.html` in a browser, you should see the same "Hello world!". 
+Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `experiment-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/experiment-with-display-element.html) contains three changes from the `experiment.html`. When you open `experiment-with-display-element.html` in a browser, you should see the same "Hello world!". 
 
 Let's look at each change.
 
 ### Change 1: Using `display_element` 
 
-By adding the `display_element` parameter in the `jsPsych.init()` like below, you can have additional control over the display element, which is important in embedding jsPsych into Qualtrics. In the below example, jsPsych will render the experiment in the '<div>' called `display_stage`, which the current script does not have yet. So, let's add the `display_stage`.
+By adding the `display_element` parameter in the `jsPsych.init()` like below, jsPsych will render the experiment in the '<div>' called `display_stage`, which the current script does not have yet. So, let's add the `display_stage`.
 
 ```html
 jsPsych.init({
@@ -189,13 +189,7 @@ So the `experiment-with-display-element.html` code looks like this.
 
 ## Second transformation: `qualtrics.js`
 
-The `qualtrics.js` file in this repository contains several changes from `experiment-with-display-element.html` and can be put into Qualtrics.
-
-Let's look at each change.
-
-### Change 1: The Question JavaScript skeleton
-
-You need to add your experiment codes to the skeleton provided by Qualtrics Question JavaScript Editor. For details, see the [Add JavaScript help page](https://www.qualtrics.com/support/survey-platform/survey-module/question-options/add-javascript/).
+To make your jsPsych experiment work in Qualtrics, you need to add your code to the below skeleton provided by Qualtrics Question JavaScript Editor. For details, see the [Add JavaScript help page](https://www.qualtrics.com/support/survey-platform/survey-module/question-options/add-javascript/).
 
 ```js
 Qualtrics.SurveyEngine.addOnload(function()
@@ -217,7 +211,11 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-### Change 2: Hide the Next button
+The `qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics.js) contains several changes from `experiment-with-display-element.html` and can be put into Qualtrics.
+
+Let's look at each change.
+
+### Change 1: Hide the Next button
 
 The below javascript code hides the Next button and puts the javascript code in the driving seat.
 
@@ -229,7 +227,7 @@ var qthis = this;
 qthis.hideNextButton();
 ```
 
-### Change 3: Define and load required resources
+### Change 2: Define and load required resources
 
 The below javascript defines where the necessary files are so that Qualtrics can load these.
 
@@ -261,7 +259,7 @@ if (window.Qualtrics && (!window.frameElement || window.frameElement.id !== "mob
 }
 ```
 
-### Change 4: Append the display_stage Div using jQuery
+### Change 3: Append the display_stage Div using jQuery
 
 In Qualtrics, jQuery (loaded by default) is used to append the `display_stage_background` and `display_stage` Divs. The CSS for these elements will be added directly to Question HTML later in this tutorial.
 
@@ -271,7 +269,7 @@ jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
 jQuery("<div id = 'display_stage'></div>").appendTo('body');
 ```
 
-### Change 5: Wrap jsPsych.init() in a function
+### Change 4: Wrap jsPsych.init() in a function
 
 The main experiment codes are wrapped in the `initExp` function to make sure it runs after all the necessary library and plugin files are loaded (as defined in the `loadScript` function above).
 
@@ -290,7 +288,7 @@ function initExp() {
 }
 ```
 
-### Change 6: Add the clean up and continue functions
+### Change 5: Add the clean up and continue functions
 
 When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. Then, execulte the `clickNextButton` to simulate clicking the Next button and proceed to the next question.
 
