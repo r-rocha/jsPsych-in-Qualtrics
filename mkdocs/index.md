@@ -13,9 +13,9 @@ If you are looking for jsPsych tutorial, the best place to start is [the jsPsych
 
 ## jsPsych in Qualtrics Tutorial Series
 
-* [Making jsPsych files loadable in Qualtrics](mkdocs/github-pages.md)
-* [Hello World!](mkdocs/hello-world.md)
-* [Reaction Time Task](mkdocs/rt-task.md)
+* [Making jsPsych files loadable in Qualtrics](github-pages.md)
+* [Hello World!](hello-world.md)
+* [Reaction Time Task](rt-task.md)
 * Flanker Task (forthcoming)
 * N-Back Task (forthcoming)
 * Backward Digit Span Task (forthcoming)

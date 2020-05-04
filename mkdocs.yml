@@ -1,0 +1,17 @@
+site_name: jsPsych in Qualtrics
+theme: readthedocs
+repo_url: 'https://github.com/kywch/jsPsych-in-Qualtrics/'
+repo_name: 'kywch/jsPsych-in-Qualtrics'
+edit_uri: ''
+docs_dir: 'mkdocs'
+nav:
+- Introduction: 'index.md'
+- Hosting jsPsych: 'github-pages.md'
+- Hello world!: 'hello-world.md'
+- Reaction-time task: 'rt-task.md'
+#- Flanker task: 'flanker.md'
+#- N-back task: 'n-back.md'
+#- Dicotic-listening: 'dichotic-listening.md'
+site_author: 'Kyoung Whan Choe'
+site_description: 'A step-by-step tutorial and examples on adding jsPsych to Qualtrics'
+copyright: 'Copyright &copy; 2020 <a href="https://kywch.github.io/" target="_blank">Kyoung Whan Choe</a>.'

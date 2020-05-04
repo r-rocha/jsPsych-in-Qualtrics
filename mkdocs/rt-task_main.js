@@ -1,8 +1,5 @@
-
-/* Change 1: Adding the image hosting site */
-// define the site that hosts stimuli images
-// usually https://<your-github-username>.github.io/<your-experiment-name>/
-var repo_site = "https://kywch.github.io/Simple-RT-Task/"; 
+/* define image url */
+var image_url = "https://kywch.github.io/jsPsych-in-Qualtrics/";
 
 /* create timeline */
 var timeline = [];
@@ -23,9 +20,9 @@ var instructions = {
         "<p>If the circle is <strong>orange</strong>, press the letter J " +
         "as fast as you can.</p>" +
         "<div style='width: 700px;'>" +
-        "<div style='float: left;'><img src='" + repo_site + "img/blue.png'></img>" + // Change 2: Adding `repo_site` in `instructions`
+        "<div style='float: left;'><img src='" + image_url + "img/blue.png'></img>" +
         "<p class='small'><strong>Press the F key</strong></p></div>" +
-        "<div class='float: right;'><img src='" + repo_site + "img/orange.png'></img>" + // Change 2: Adding `repo_site` in `instructions`
+        "<div class='float: right;'><img src='" + image_url + "img/orange.png'></img>" +
         "<p class='small'><strong>Press the J key</strong></p></div>" +
         "</div>" +
         "<p>Press any key to begin.</p>",
@@ -36,14 +33,14 @@ timeline.push(instructions);
 /* test trials */
 
 var test_stimuli = [{
-        stimulus: repo_site + "img/blue.png", // Change 3: Adding `repo_site` in `test_stimuli`
+        stimulus: image_url + "img/blue.png",
         data: {
             test_part: 'test',
             correct_response: 'f'
         }
     },
     {
-        stimulus: repo_site + "img/orange.png", // Change 3: Adding `repo_site` in `test_stimuli`
+        stimulus: image_url + "img/orange.png",
         data: {
             test_part: 'test',
             correct_response: 'j'

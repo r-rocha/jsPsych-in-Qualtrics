@@ -2,8 +2,18 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     /*Place your JavaScript here to run when the page loads*/
 
-    var jslib_url = "https://kywch.github.io/jsPsych-in-Qualtrics/";
+    /* Change 2: Hide the Next button */
+    // Retrieve Qualtrics object and save in qthis
+    var qthis = this;
 
+    // Hide buttons
+    qthis.hideNextButton();
+
+    /* Change 3: Define and load required resources */
+    var jslib_url = "https://kywch.github.io/jsPsych/";
+
+    // the below urls must be accessible with your browser
+    // for example, https://kywch.github.io/jsPsych/jspsych.js
     var requiredResources = [
         jslib_url + "jspsych.js",
         jslib_url + "plugins/jspsych-html-keyboard-response.js"
@@ -20,22 +30,17 @@ Qualtrics.SurveyEngine.addOnload(function () {
         });
     }
 
-    // Retrieve Qualtrics object and save in qthis
-    var qthis = this;
-
-    // Hide buttons
-    qthis.hideNextButton();
-
-    // load required resources (e.g., jsPsych and plugins) for this experiment
     if (window.Qualtrics && (!window.frameElement || window.frameElement.id !== "mobile-preview-view")) {
         loadScript(0);
     }
 
-    // set the display stage, which is defined in css
+    /* Change 4: Append the display_stage Div using jQuery */
     // jQuery is loaded in Qualtrics by default
     jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
     jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
+
+    /* Change 5: Wrap jsPsych.init() in a function */
     function initExp() {
 
         var hello_trial = {
@@ -46,6 +51,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
         jsPsych.init({
             timeline: [hello_trial],
             display_element: 'display_stage',
+
+            /* Change 6: Add the clean up and continue functions.*/
             on_finish: function (data) {
                 // clear the stage
                 jQuery('display_stage').remove();
