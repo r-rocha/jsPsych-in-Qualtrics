@@ -1,6 +1,6 @@
 
 *The original version of this tutorial is hosted at <a href="https://github.com/janakl4us/flanker/blob/master/tutorial.md">https://github.com/janakl4us/flanker</a>. 
-This tutorial has been updated to be in sync with the code in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html).*
+This tutorial has been updated to be in sync with the `demo-flanker.html` in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html).*
 
 # Eriksen Flanker Task
 
