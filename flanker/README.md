@@ -173,7 +173,7 @@ var test_stimuli = [
 ## Part 4: Creating an experimental block
 
 So far, we have set up a welcome message, an instructions block, and the stimuli for our experiment. 
-**<font color=red>Now comes the most important part, that is, creating the `timeline` in the `test` block.</font>**
+**Now comes the most important part, that is, creating the `timeline` in the `test` block.**
 As you can see, there is a LOT packed in here.
 
 * `type`: It is supported by the `image-keyboard-response` plugin, so this information needs to go in first.
