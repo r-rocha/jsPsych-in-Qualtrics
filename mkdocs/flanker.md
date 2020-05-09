@@ -43,7 +43,9 @@ If you see a GitHub file that you want to embed in your experiment, like [jspsyc
 you can use [jSDelivr](https://www.jsdelivr.com/?docs=gh) to fetch the file like `https://cdn.jsdelivr.net/gh/<github-username>/<repository-name>/<file-name>`: 
 <a href="https://cdn.jsdelivr.net/gh/jspsych/jsPsych/jspsych.js">https://cdn.jsdelivr.net/gh/jspsych/jsPsych/jspsych.js</a>.
 
-### Using the jsPsych GitHub files for the flanker task
+<font color=red>WARNING: if you are making changes, it takes up to 24 hours to show up. THUS NOT RECOMMENDED </font>
+
+### Using this tutorial's GitHub files for the flanker task
 
 This jsPsych-in-Qualtrics repository has the files necessary to run the flanker task. 
 These files can be embedded via jSDelivr (github-username: `kywch`, repository-name: `jsPsych-in-Qualtrics`, experiment-folder: `flanker`). 
@@ -185,7 +187,7 @@ timeline.push(debrief);
 
 ### Step 4. `flanker_main.js`: Use the GitHub-hosted stimuli images
 
-Let's use [the above images](flanker.md#using-the-jspsych-github-files-for-the-flanker-task) hosted in the GitHub. 
+Let's use [the above GitHub-hosted images](flanker.md#using-this-tutorials-github-files-for-the-flanker-task). 
 
 The `flanker_main.js` in this tutorial has a few changes to do so. Let's see these changes.
 
@@ -243,7 +245,7 @@ var test_stimuli = [
 
 Cutting the experiment-related code makes the `demo-flanker-transformed.html` file much shorter. 
 
-Let's also use [the above JS and CSS files](flanker.md#using-the-jspsych-github-files-for-the-flanker-task) hosted in the GitHub. 
+Let's also use [the GitHub-hosted JS and CSS files (above)](flanker.md#using-this-tutorials-github-files-for-the-flanker-task). 
 In addition, you also need to load `flanker_main.js` by using a `<script>` tag like the other jspsych plugin files (see [the original jsPsych tutorial](https://www.jspsych.org/tutorials/hello-world/#step-6-use-the-jspsych-html-keyboard-response-plugin-to-print-a-message)).
 
 You can use your own repository by creating the jsDelivr link by following [this guide](https://www.jsdelivr.com/?docs=gh).
@@ -258,32 +260,31 @@ You can use your own repository by creating the jsDelivr link by following [this
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/css/jspsych.css">
 ```
 
-#### CHANGE 2: Loading the GitHub-hosted main experiment script
+#### CHANGE 2: Loading the main experiment script in the same local folder
 
 ```html
-<!-- CHANGE 2: Loading the GitHub-hosted main experiment script -->
-<script src="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/flanker_main.js"></script> 
+<!-- CHANGE 2: Loading the main experiment script in the same folder-->
+<script src="flanker_main.js"></script>
 ```
 
 ### Does this work?
 
-Let's find out by opening `demo-flanker.html` in a browser. 
+Let's find out by opening `demo-flanker-transformed.html` in a browser. 
 
+### Step 6: Upload `demo-flanker-transformed.html` and `flanker_main.js` to GitHub
 
+If this works, you may want to start a new GitHub repository for this task, as I did with [my simple Reaction Time Task](rt-task.md#hosting-this-task-in-github).
 
-### Step 6: Upload `demo-simple-rt-task-transformed.html` and `rt-task_main.js` to GitHub
-
-If this works, let's upload `demo-simple-rt-task-transformed.html` and `rt-task_main.js` to your GitHub repository so that your task also runs over the Internet.
-
-After uploading both scripts (and waiting for a few minutes), you should be able to access `https://<your-github-username>.github.io/<your-experiment-name>/demo-simple-rt-task-transformed.html`. For example, <a href='https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task-transformed.html'>https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task-transformed.html</a>.
-
-If the above link works, then it also means that the experiment-related code, `rt-task_main.js`, is also available for Qualtrics to load. You can actually access it by going to `https://<your-github-username>.github.io/<your-experiment-name>/rt-task_main.js`. For example, <a href='https://kywch.github.io/Simple-RT-Task/rt-task_main.js'>https://kywch.github.io/Simple-RT-Task/rt-task_main.js</a>.
+Or, you may just want to try this flanker task in the Qualtrics. In that case, you can use the `flanker_main.js` in this tutorial GitHub repository, 
+which is at <a href='https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/flanker_main.js'>https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/flanker_main.js</a> and available for Qualtrics to load.
 
 ---
 
-## Second transformation: `demo-simple-rt-task-transformed-with-display-element.html`
+## Second transformation: `demo-flanker-transformed-with-display-element.html`
 
-Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `demo-simple-rt-task-transformed-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-transformed-with-display-element.html) contains three changes from the `demo-simple-rt-task-transformed.html`. When you open `demo-simple-rt-task-transformed-with-display-element.html` in a browser, you should see the same reaction time task. 
+Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. 
+The `demo-flanker-transformed-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/flanker/demo-simple-rt-task-transformed-with-display-element.html) contains three changes from the `demo-flanker-transformed.html`. 
+When you open `demo-flanker-transformed-with-display-element.html` in a browser, you should see the same flanker task. 
 
 Let's look at each change.
 
@@ -294,12 +295,12 @@ By adding the `display_element` parameter in the `jsPsych.init()` like below, js
 ```js
 /* start the experiment */
 jsPsych.init({
-timeline: timeline,
-/* Change 1: Using `display_element` */
-display_element: 'display_stage',
-on_finish: function () {
+  timeline: timeline,
+  /* Change 1: Using `display_element` */
+  display_element: 'display_stage',
+  on_finish: function () {
     jsPsych.data.displayData();
-}
+  }
 });
 ```
 
@@ -338,13 +339,15 @@ The `display_stage` needs below CSS and HTML code after the `<body>` tag, which 
 
 The below scripts are not necessary to run this reaction time experiment, but you need to copy-paste these in Qualtrics later. 
 
-One critical point is that now we use the jsPsych stylesheet hosted in the GitHub Pages (explained above in the [Hosting jsPsych](rt-task.md#step-4-enable-github-pages-for-your-experiment) section) instead of the CSS file in your computer. This is important because Qualtrics can also access the GitHub-hosted files.
+One critical point is that now we use the jsPsych stylesheet hosted in the GitHub Pages 
+(explained above in the [Using the jsPsych files](flanker.md#using-this-tutorials-github-files-for-the-flanker-task) section) 
+instead of the CSS file in your computer. This is important because Qualtrics can also access the GitHub-hosted files.
 
 ```html
 <!-- Change 3: Adding extra scripts for Qualtrics -->
-<!-- jspsych.css should be availble from your GitHub at 
-    https://<your-github-username>.github.io/<your-experiment-name>/jspsych-6.1.0/css/jspsych.css -->
-<link href="https://kywch.github.io/Simple-RT-Task/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+<!-- Use JSDELIVR to get the files from a GitHub repository
+   https://cdn.jsdelivr.net/gh/<github-username>/<repository-name>/<specific folder or file> -->
+<link href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 
 <div>
     <span style="font-size: 24px;">
@@ -359,9 +362,10 @@ One critical point is that now we use the jsPsych stylesheet hosted in the GitHu
 
 ---
 
-## Third transformation: `demo-simple-rt-task-qualtrics.js`
+## Third transformation: `demo-flanker-qualtrics.js`
 
-To make your jsPsych experiment work in Qualtrics, you need to add your code to the below skeleton provided by Qualtrics Question JavaScript Editor. For details, see the [Add JavaScript help page](https://www.qualtrics.com/support/survey-platform/survey-module/question-options/add-javascript/).
+To make your jsPsych experiment work in Qualtrics, you need to add your code to the below skeleton provided by Qualtrics Question JavaScript Editor. 
+For details, see the [Add JavaScript help page](https://www.qualtrics.com/support/survey-platform/survey-module/question-options/add-javascript/).
 
 ```js
 Qualtrics.SurveyEngine.addOnload(function()
@@ -383,7 +387,7 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-qualtrics.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
+The `demo-flanker-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-flanker-transformed-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
 By separating the experiment-related code from the operation-related code, converting the html file to Qualtrics JavaScript function is pretty much similar to [the Hello-World example](hello-world.md#second-transformation-qualtricsjs).
 
@@ -403,19 +407,20 @@ qthis.hideNextButton();
 
 ### Change 2: Define and load required resources
 
-The below javascript defines where the necessary files are so that Qualtrics can load these. If you enabled GitHub Pages of your repository, Qualtrics can load the necessary JS, CSS, and image files right away.
+The below javascript defines where the necessary files are so that Qualtrics can load these. If you enabled GitHub Pages of your repository, Qualtrics can load the necessary JS, CSS, and image files right away. Or, you can provide the embeddable links via jsDelivr. Here, let's continue to use jsDelivr.
 
-One way to check whether these files are accessilbe is to view the source of `demo-simple-rt-task-transformed.html` and click the imported scripts. For example of `jspsych.js`, <a href='https://kywch.github.io/Simple-RT-Task/jspsych-6.1.0/jspsych.js'>https://your-github-username.github.io/your-experiment-name/jspsych-6.1.0/jspsych.js</a>.
+One way to check whether these files are accessilbe is to view the source of `demo-flanker-transformed.html` and click the imported scripts. For example of `jspsych.js`, <a href='https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/jspsych.js'>https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/jspsych.js</a>.
 
 ```js
-var task_github = "https://kywch.github.io/Simple-RT-Task/"; // https://<your-github-username>.github.io/<your-experiment-name>
+// https://cdn.jsdelivr.net/gh/<github-username>/<repository-name>/<experiment-folder>
+var task_github = "https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/"; 
 
 // requiredResources must include all the JS files that demo-simple-rt-task-transformed.html uses.
 var requiredResources = [
     task_github + "jspsych-6.1.0/jspsych.js",
     task_github + "jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js",
     task_github + "jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js",
-    task_github + "rt-task_main.js"
+    task_github + "flanker_main.js"
 ];
 
 function loadScript(idx) {
@@ -450,33 +455,40 @@ The main experiment codes are wrapped in the `initExp` function to make sure it 
 
 ### Change 5: Summarize and save the results to Qualtrics
 
-[The original jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
+[The jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
 
-Well, you can actually do this by summarizing the results online and save those results in [Qualtrics' Embedded Data](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) using the [setEmbeddedData](https://s.qualtrics.com/WRAPI/QuestionAPI/classes/Qualtrics%20JavaScript%20Question%20API.html#method_setEmbeddedData) function.
+Well, you can actually summarize the results online and save those results in [Qualtrics' Embedded Data](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) using the [setEmbeddedData](https://s.qualtrics.com/WRAPI/QuestionAPI/classes/Qualtrics%20JavaScript%20Question%20API.html#method_setEmbeddedData) function.
 
-`demo-simple-rt-task-qualtrics.js` does so when the jsPsych experiment finishes by running the below code (from [`debrief_block`](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation)).
+`demo-flanker-qualtrics.js` does so when the jsPsych experiment finishes by running the below code from [`debrief_block`](https://github.com/kywch/jsPsych-in-Qualtrics/tree/master/flanker#part-5-presenting-feedback-to-the-participants).
 
 ```js
 jsPsych.init({
     timeline: timeline,
     display_element: 'display_stage',
     on_finish: function (data) {
-        /* Change 6: Summarize and save the results to Qualtrics */
+        /* Change 5: Summarize and save the results to Qualtrics */
         // summarize the results
-        var trials = jsPsych.data.get().filter({
-            test_part: 'test'
-        });
-        var correct_trials = trials.filter({
+        var total_trials = jsPsych.data.get().filter({
+            trial_type: 'image-keyboard-response'
+        }).count();
+        var accuracy = Math.round(jsPsych.data.get().filter({
             correct: true
-        });
-        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-        var rt = Math.round(correct_trials.select('rt').mean());
+        }).count() / total_trials * 100);
+        var congruent_rt = Math.round(jsPsych.data.get().filter({
+            correct: true,
+            stim_type: 'congruent'
+        }).select('rt').mean());
+        var incongruent_rt = Math.round(jsPsych.data.get().filter({
+            correct: true,
+            stim_type: 'incongruent'
+        }).select('rt').mean());
 
         // save to qualtrics embedded data
         Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
-        Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
+        Qualtrics.SurveyEngine.setEmbeddedData("congruent_rt", congruent_rt);
+        Qualtrics.SurveyEngine.setEmbeddedData("incongruent_rt", incongruent_rt);
 
-        /* Change 7: Add the clean up and continue functions.*/
+        /* Change 6: Add the clean up and continue functions.*/
         // clear the stage
         jQuery('display_stage').remove();
         jQuery('display_stage_background').remove();
@@ -511,49 +523,53 @@ Keep going in the above picture. (2) Click the gear to open the dropdown menu, a
 
 ![Open the Question JavaScript editor](img/hello-world-qualtrics-Step2_open_javascript_editor.jpg)
 
-### Step 3. Open the Question HTML editor and copy paste the portion of `demo-simple-rt-task-transformed-with-display-element.html`
+### Step 3. Open the Question HTML editor and copy paste the portion of `demo-flanker-transformed-with-display-element.html`
 
-The Change 3 section of the `demo-simple-rt-task-transformed-with-display-element.html` file contains the link to jsPsych CSS file, the inline styles for `display_stage` Div, and the error message to be displayed when things go wrong.
+The Change 3 section of the `demo-flanker-transformed-with-display-element.html` file contains the link to jsPsych CSS file, the inline styles for `display_stage` Div, and the error message to be displayed when things go wrong.
 
 To open the HTML editor, click the `HTML View` button. 
 
 ![Open the Question HTML editor](img/hello-world-qualtrics-Step3_open_question_html_editor.jpg)
 
-Then, copy paste the portion of `demo-simple-rt-task-transformed-with-display-element.html` to the HTML editor, starting from `<!-- COPY PASTE TO QUALTRICS FROM HERE -->` to `<!-- COPY PASTE TO QUALTRICS UP TO HERE -->`. After copy pasting, you should see something like below.
+Then, copy paste the portion of `demo-flanker-transformed-with-display-element.html` to the HTML editor, starting from `<!-- COPY PASTE TO QUALTRICS FROM HERE -->` to `<!-- COPY PASTE TO QUALTRICS UP TO HERE -->`. After copy pasting, you should see something like below.
 
 ![After copy-paste](img/hello-world-qualtrics-Step3_after_copy_paste.jpg)
 
 ### Step 4. Creating Embedded Data elements
 
-To store the experiment results -- **accuracy** and **rt** -- in Qualtrics, you need to create the Embedded Data elements named **accuracy** and **rt** in your survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#CreatingAnEmbeddedDataElement).
+To store the experiment results -- **accuracy**, **congruent_rt**, and **incongruent_rt** -- in Qualtrics, you need to create the Embedded Data elements named **accuracy**, **congruent_rt**, and **incongruent_rt** in your survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#CreatingAnEmbeddedDataElement).
 
 1. Click **Survey Flow** from the Survey tab
 2. Click **Add a New Element Here**
 3. Choose **Embedded Data** 
 4. Click **Create New Field or Choose From Dropdown** and type **accuracy**
 5. Click **Set a Value Now** and type -1
-6. Click **Add a New Field** and type **rt**
+6. Click **Add a New Field** and type **congruent_rt**
 7. Click **Set a Value Now** and type -1
+8. Click **Add a New Field** and type **incogruent_rt**
+9. Click **Set a Value Now** and type -1
 
 ### Step 5. Move `Set Embedded Data` block to the top of Survey Flow
 
-The `accuracy` and `rt` fields should be defined before the jsPsych reaction time task, so you need to move the Embedded Data block to the **top** of the Survey Flow.
+The `accuracy`, `congruent_rt`, and `incongruent_rt` fields should be defined before the jsPsych reaction time task, 
+so you need to move the Embedded Data block to the **top** of the Survey Flow.
 
 Click and hold down **Move** to drag the Embedded Data to the top of the Survey Flow. After this, you should see the Survey Flow like below.
 
-![Move Embedded Data to the top](img/rt-task-qualtrics-Step5_move_block.jpg)
+![Move Embedded Data to the top](img/flanker-qualtrics-Step5_move_block.jpg)
 
 ### Step 6. Add a check for the Embedded Data
 
-You should make sure that the experiment results are saved correctly. You can do so by showing the `accuracy` and `rt` Embedded Data after the reaction task.
+You should make sure that the experiment results are saved correctly. 
+You can do so by showing the `accuracy`, `congruent_rt`, and `incongruent_rt` Embedded Data after the reaction task.
 
 1. Click **Add Page Break**
 2. Click **Create a New Question**
 3. Change Question Type to **Text/Graphic**
-4. Type `${e://Field/accuracy}` and `${e://Field/rt}` to access these Embedded Data
+4. Type `${e://Field/accuracy}`, `${e://Field/congruent_rt}`, and `${e://Field/incongruent_rt}` to access these Embedded Data
 
-![Show Embedded Data](img/rt-task-qualtrics-Step6_show_data.jpg)
+![Show Embedded Data](img/flanker-qualtrics-Step6_show_data.jpg)
 
 ### Step 7. Publish and test!
 
-Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-publishing-versions/#PublishingNew). Then, an anonymous Qualtrics link is generated. If you click this link, you should be able to see the same reaction time task running in Qualtrics. For example, try [this Qualtrics link](https://ssd.az1.qualtrics.com/jfe/form/SV_6hsqwxYekrbzvxP).
+Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-publishing-versions/#PublishingNew). Then, an anonymous Qualtrics link is generated. If you click this link, you should be able to see the same reaction time task running in Qualtrics. For example, try [this Qualtrics link](https://ssd.az1.qualtrics.com/jfe/form/SV_enXPx66m9iOM6Sp).

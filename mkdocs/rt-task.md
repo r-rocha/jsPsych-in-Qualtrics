@@ -364,7 +364,7 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-qualtrics.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
+The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-transformed-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
 By separating the experiment-related code from the operation-related code, converting the html file to Qualtrics JavaScript function is pretty much similar to [the Hello-World example](hello-world.md#second-transformation-qualtricsjs).
 
@@ -433,7 +433,7 @@ The main experiment codes are wrapped in the `initExp` function to make sure it 
 
 [The original jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
 
-Well, you can actually do this by summarizing the results online and save those results in [Qualtrics' Embedded Data](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) using the [setEmbeddedData](https://s.qualtrics.com/WRAPI/QuestionAPI/classes/Qualtrics%20JavaScript%20Question%20API.html#method_setEmbeddedData) function.
+Well, you can actually summarize the results online and save those results in [Qualtrics' Embedded Data](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) using the [setEmbeddedData](https://s.qualtrics.com/WRAPI/QuestionAPI/classes/Qualtrics%20JavaScript%20Question%20API.html#method_setEmbeddedData) function.
 
 `demo-simple-rt-task-qualtrics.js` does so when the jsPsych experiment finishes by running the below code (from [`debrief_block`](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation)).
 
@@ -442,7 +442,7 @@ jsPsych.init({
     timeline: timeline,
     display_element: 'display_stage',
     on_finish: function (data) {
-        /* Change 6: Summarize and save the results to Qualtrics */
+        /* Change 5: Summarize and save the results to Qualtrics */
         // summarize the results
         var trials = jsPsych.data.get().filter({
             test_part: 'test'
@@ -457,7 +457,7 @@ jsPsych.init({
         Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
         Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
 
-        /* Change 7: Add the clean up and continue functions.*/
+        /* Change 6: Add the clean up and continue functions.*/
         // clear the stage
         jQuery('display_stage').remove();
         jQuery('display_stage_background').remove();
