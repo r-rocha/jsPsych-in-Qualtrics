@@ -33,8 +33,6 @@ plugins which can be specified in the `<head>` of the file.
 </html>
 ```
 
----
-
 ## Part 2: Adding welcome and instructions blocks and starting the experiment
 
 This is also very straightforward. We present a welcome message as well as the instructions in two separate blocks. 
@@ -140,8 +138,6 @@ If you are unsure about any of this, go back to the [tutorial for running a simp
 If you run this code in your browser, you should see the welcome message as well as the instructions. Next, we need to
 define which stimuli we are going to use for the experiment.
 
----
-
 ## Part 3: Defining the stimuli
 
 For this experiment we are using four image files which are stored in the `img` folder. 
@@ -194,8 +190,6 @@ var post_trial_gap = function() {
 };
 ```
 
----
-
 ## Part 4: Creating an experimental block
 
 So far, we have set up a welcome message, an instructions block, and the stimuli for our experiment. 
@@ -217,7 +211,6 @@ For example, whenever a congruent stimulus was displayed and the left arrow key 
 an incongruent stimulus was displayed and the right arrow key was pressed (and neither of those reactions was later than the 1500 ms limit we defined earlier), 
 the program returns the information that these are correct trials.
 * `post_trial_gap`: This code generates a jittered inter-trial interval between 500 - 2000 ms.
-
 
 ```javascript
 /* experiment parameters */
@@ -372,8 +365,6 @@ timeline.push(test);
 </html>
 ```
 
----
-
 ## Part 5: Presenting feedback to the participants
 
 Running the experiment now will provide you with a welcome message, instructions, and 16 trials. We would like to give
@@ -382,7 +373,6 @@ the participants feedback about their performance at the end of the experiment.
 and the tutorial explains this very well in the [Part 11: Data aggregation](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation).
 
 This debriefing block shows the accuracy, mean RT for congruent trials, and mean RT for incongruent trials.
-Don't forget to add this block to the timeline as well!
 
 ```javascript
 /*defining debriefing block*/
@@ -411,75 +401,9 @@ var debrief = {
 };
 ```
 
-
-(Note: This was already part of the [basic tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation)). We first need to
-modify our `test_block` a bit to define what a correct trial is.
-
+Don't forget to add this block to the timeline as well!
 ```javascript
-var test_block = {
-  type: 'single-stim',
-  choices: [37, 39],
-  timing_response: 1500,
-  on_finish: function(data){
-      var correct = false;
-      if(data.phase == 'congruent' &&  data.key_press == '37' && data.rt > -1){
-        correct = true;
-      } else if(data.phase == 'incongruent' && data.key_press == '39' && data.rt > -1){
-        correct = true;
-      }
-      jsPsych.data.addDataToLastTrial({correct: correct});
-    },
-  timeline: all_trials,
-  timing_post_trial: post_trial_gap
-};
-```
-
-Essentially, what we're doing here is saying that whenever a congruent stimulus was displayed and the left arrow key
-was pressed <em>or</em> an incongruent stimulus was displayed and the right arrow key was pressed (and neither of those
-reactions was later than the 1500 ms limit we defined earlier), the program returns the information that these are
-correct trials.
-
-We want to display both the percentage of correct responses as well as the mean reaction time. For this, we need to add
-the following function to the code:
-
-```javascript
-function getSubjectData() {
-
-  var trials = jsPsych.data.getTrialsOfType('single-stim');
-
-  var sum_rt = 0;
-  var correct_trial_count = 0;
-  var correct_rt_count = 0;
-  for (var i = 0; i < trials.length; i++) {
-    if (trials[i].correct == true) {
-      correct_trial_count++;
-      if(trials[i].rt > -1){
-        sum_rt += trials[i].rt;
-        correct_rt_count++;
-      }
-    }
-  }
-  return {
-    rt: Math.floor(sum_rt / correct_rt_count),
-    accuracy: Math.floor(correct_trial_count / trials.length * 100)
-  }
-};
-```
-Finally, we add a debriefing block which is displayed after the last trial of the experiment. Don't forget to add this
-block to the timeline as well!
-
-```javascript
-var debrief_block = {
-  type: "text",
-  text: function() {
-    var subject_data = getSubjectData();
-    return "<p style='margin:20%'>You responded correctly on "+subject_data.accuracy+"% of the trials. " +
-    "Your average response time was <strong>" + subject_data.rt + "ms</strong>. Press any key to complete the "+
-    "experiment. Thank you!</p>";
-  }
-};
-
-timeline.push(debrief_block);
+timeline.push(debrief);
 ```
 
 ### [The final code](demo-flanker.html):
