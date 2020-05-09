@@ -211,7 +211,7 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-The `qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics.js) contains several changes from `experiment-with-display-element.html` and can be put into Qualtrics.
+The `qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics.js) contains several changes from `experiment-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
 Let's look at each change.
 

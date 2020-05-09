@@ -364,7 +364,9 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-qualtrics.html` and can be put into Qualtrics. By separating the experiment-related code from the operation-related code, converting the html file to Qualtrics JavaScript function is pretty much similar to [the Hello-World example](hello-world.md#second-transformation-qualtricsjs).
+The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-qualtrics.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
+
+By separating the experiment-related code from the operation-related code, converting the html file to Qualtrics JavaScript function is pretty much similar to [the Hello-World example](hello-world.md#second-transformation-qualtricsjs).
 
 Let's look at each change.
 

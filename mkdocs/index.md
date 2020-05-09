@@ -16,7 +16,7 @@ If you are looking for jsPsych tutorial, the best place to start is [the jsPsych
 * [Making jsPsych files loadable in Qualtrics](github-pages.md)
 * [Hello World!](hello-world.md)
 * [Reaction Time Task](rt-task.md)
-* Flanker Task (forthcoming)
+* [Flanker Task](flanker.md)
 * N-Back Task (forthcoming)
 * Backward Digit Span Task (forthcoming)
 * Dichotic Listening Task (forthcoming)
