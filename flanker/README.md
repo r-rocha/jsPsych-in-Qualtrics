@@ -339,7 +339,7 @@ timeline.push(test);
 Running the experiment now will provide you with a welcome message, instructions, and 16 trials. We would like to give
 the participants feedback about their performance at the end of the experiment. 
 [The jsPsych Reaction Time task also does this](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation),
-and the tutorial explains this very well in the [Part 11: Data aggregation](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation).
+and the tutorial explains in detail in the [Part 11: Data aggregation](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation).
 
 This debriefing block shows the accuracy, mean RT for congruent trials, and mean RT for incongruent trials.
 
