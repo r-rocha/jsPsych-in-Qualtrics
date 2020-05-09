@@ -80,8 +80,7 @@ jsPsych.init({
 );
 ```
 
-If you are unsure about any of this, go back to the [tutorial for running a simple reaction time task]
-(https://www.jspsych.org/tutorials/rt-task/).
+If you are unsure about any of this, go back to the [tutorial for running a simple reaction time task](https://www.jspsych.org/tutorials/rt-task/).
 
 ### The code so far:
 
