@@ -171,25 +171,6 @@ var test_stimuli = [
 ];
 ```
 
-Now that we have defined our stimuli, we want them to be displayed and repeated in a random order. 
-This can easily be
-done by using the randomisation code implemented in jsPsych. We simply create a variable which we call `all_trials`
-that is going to display each stimulus <em>x</em> times, <em>x</em> being the number you define. Let's say we want a
-100-trial experiment:
-
-```javascript
-var all_trials = jsPsych.randomization.repeat(test_stimuli, 25);
-```
-
-We also want the inter-stimulus interval to be variable, so we define a `post_trial_gap`. This will use a random value
-between 1000 and 2000 ms, with uniform sampling from the range. Again, you can modify these parameters as you please.
-
-```javascript
-var post_trial_gap = function() {
-    return Math.floor(Math.random() * 1500) + 500;
-};
-```
-
 ## Part 4: Creating an experimental block
 
 So far, we have set up a welcome message, an instructions block, and the stimuli for our experiment. 
@@ -203,14 +184,14 @@ For details of `jsPsych.timelineVariable`, see [the jsPsych tutorial on timeline
 * `stimulus` and `data`: The `test_stimuli` defined above is referenced in the `timeline_variables`, 
 and the `stimulus` and `data` defined in the `test_stimuli` are fed into the plugin via the `jsPsych.timelineVariable` function 
 (see [the tutorial](https://www.jspsych.org/overview/timeline/#timeline-variables)).
-* `sample`: At the same time, the number and type of trials are defined via `sample` (see [the jsPsych tutorial on sampling](https://www.jspsych.org/overview/timeline/#repeating-each-trial-a-fixed-number-of-times-in-a-random-order)).
-This timeline contains 4 repetitions (as defined in `reps_per_trial_type`) of 4 different trials types (as defined in `test_stimuli`)
+* `sample`: Now that we have defined our stimuli, we want them to be displayed and repeated in a random order. 
+This can easily be done via `sample` (see [the jsPsych tutorial on sampling](https://www.jspsych.org/overview/timeline/#repeating-each-trial-a-fixed-number-of-times-in-a-random-order)). This timeline contains 4 repetitions (as defined in `reps_per_trial_type`) of 4 different trials types (as defined in `test_stimuli`), resulting in 16 trials.
 * `on_finish`: When a trial finishes, its `data` is passed to be examined right away. 
 Here, the code compares the response (`data.key_press` and `data.rt`) with the stimulus (`data.direction`) and records `data.correct` variable.
 For example, whenever a congruent stimulus was displayed and the left arrow key was pressed <em>or</em> 
 an incongruent stimulus was displayed and the right arrow key was pressed (and neither of those reactions was later than the 1500 ms limit we defined earlier), 
 the program returns the information that these are correct trials.
-* `post_trial_gap`: This code generates a jittered inter-trial interval between 500 - 2000 ms.
+* `post_trial_gap`: We also want the inter-stimulus interval to be variable. This code will use a random value between 500 and 2000 ms, with uniform sampling from the range. Again, you can modify these parameters as you please.
 
 ```javascript
 /* experiment parameters */
@@ -289,33 +270,22 @@ timeline.push(test);
   };
 
   /*defining stimuli*/
-  var test_stimuli = [{
+  var test_stimuli = [
+    {
       stimulus: "img/con1.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'left'
-      }
+      data: { stim_type: 'congruent', direction: 'left'}
     },
     {
       stimulus: "img/con2.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'right'
-      }
+      data: { stim_type: 'congruent', direction: 'right'}
     },
     {
       stimulus: "img/inc1.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'right'
-      }
+      data: { stim_type: 'incongruent', direction: 'right'}
     },
     {
       stimulus: "img/inc2.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'left'
-      }
+      data: { stim_type: 'incongruent', direction: 'left'}
     }
   ];
 
@@ -443,33 +413,22 @@ timeline.push(debrief);
   };
 
   /*defining stimuli*/
-  var test_stimuli = [{
+  var test_stimuli = [
+    {
       stimulus: "img/con1.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'left'
-      }
+      data: { stim_type: 'congruent', direction: 'left'}
     },
     {
       stimulus: "img/con2.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'right'
-      }
+      data: { stim_type: 'congruent', direction: 'right'}
     },
     {
       stimulus: "img/inc1.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'right'
-      }
+      data: { stim_type: 'incongruent', direction: 'right'}
     },
     {
       stimulus: "img/inc2.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'left'
-      }
+      data: { stim_type: 'incongruent', direction: 'left'}
     }
   ];
 
