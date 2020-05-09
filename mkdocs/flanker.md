@@ -1,50 +1,90 @@
+# Embedding the jsPsych Flanker Task into Qualtrics
 
-*The original version of this tutorial is hosted at <a href="https://github.com/janakl4us/flanker/blob/master/tutorial.md">https://github.com/janakl4us/flanker</a>. 
-This tutorial has been updated to be in sync with the code in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html).*
-
-# Eriksen Flanker Task
-
-The flanker task is a popular task to measure response inhibition. In the variant presented here, participants are
-required to judge whether an arrow presented between four other arrows is pointing in the same or the opposite
-direction by pressing a key on the keyboard. We will create a 16-trial long version of this task which provides
-feedback on the participant's performance at the end of the experiment.
-
-## Part 1: Setting up the HTML file
-
-As always, we need to create an HTML file which references the Javascript plugins and CSS required. 
-For this experiment, we will only use the [jspsych-html-keyboard-response](https://github.com/jspsych/jsPsych/blob/master/plugins/jspsych-html-keyboard-response.js)
- and [jspsych-image-keyboard-response](https://github.com/jspsych/jsPsych/blob/master/plugins/jspsych-image-keyboard-response.js)
-plugins which can be specified in the `<head>` of the file.
-
-```html
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Flanker Task</title>
-  <script src="jspsych-6.1.0/jspsych.js"></script>
-  <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
-  <script src="jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
-  <link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css">
-</head>
-
-<body>
-</body>
-</html>
-```
+Let's start from the `demo-flanker.html` in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html) and embed it to qualtrics. 
 
 ---
 
-## Part 2: Adding welcome and instructions blocks and starting the experiment
+## The start: `demo-flanker-task.html`
 
-This is also very straightforward. We present a welcome message as well as the instructions in two separate blocks. 
-Of course, this text can be adapted according to what you want to focus on. 
-Here, we're just saying that the task is to press one of two buttons in response to the middle arrow displayed on the screen. 
-Note that after the participants read the instructions, they can start the experiment by pressing any key. 
-The first trial then starts 1000 ms after that button press, as defined in `post_trial_gap`. 
-These options obviously can be changed as well.
+The experiment code, `demo-flanker.html` is included in [the examples folder in the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html). 
+Let's make the code work in a separate folder like [the hello-world example](https://www.jspsych.org/tutorials/hello-world/#step-2-create-a-folder-to-store-your-experiment-files).
 
-```javascript
+To do so, you need to change the url of jsPsych scripts, stylesheet, and stimuli of the experiment code. In this tutorial, we will change those twice to make the flanker task (1) run on a new folder and (2) use the GitHub-hosted resources.
+
+First, let's make it run locally. To do so, The jsPsych library, plugins, and stylesheet come from the local folder. As you can see, the `demo-flanker.html` in this repository looks at the local `jspsych-6.1.0` folder for these files.
+
+```html
+<script src="jspsych-6.1.0/jspsych.js"></script>
+<script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
+<link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css"></link>
+```
+
+The experiment also needs stimuli images. So, you need to create a folder called `img` in the experiment folder and copy 
+[con1.png](https://raw.githubusercontent.com/jspsych/jsPsych/master/examples/img/con1.png), 
+[con2.png](https://raw.githubusercontent.com/jspsych/jsPsych/master/examples/img/con2.png),
+[inc1.png](https://raw.githubusercontent.com/jspsych/jsPsych/master/examples/img/inc1.png),
+and [inc2.png](https://raw.githubusercontent.com/jspsych/jsPsych/master/examples/img/inc2.png) into the `img` folder.
+
+Your folder should look like this (and imagine the html file has the name `demo-flanker.html`).
+
+![Simple RT-task folder](img/rt-task-start_RT_task_folder.jpg)
+
+---
+
+## Using files in public GitHub repositories
+
+To use jsPsych in Qualtrics, the jsPsych javascript and CSS files need to be online and loadable from Qualtrics. 
+You can make your files online using GitHub Pages, as explained in the [Hosting jsPsych](github-pages.md) or the [Hosting RT Task](rt-task.md#hosting-this-task-in-github). 
+
+**But you can do so WITHOUT setting up your own GitHub Pages.**
+
+If you see a GitHub file that you want to embed in your experiment, like [jspsych.js in jsPsych GitHub](https://github.com/jspsych/jsPsych/blob/master/jspsych.js),
+you can use [jSDelivr](https://www.jsdelivr.com/?docs=gh) to fetch the file like `https://cdn.jsdelivr.net/gh/<github-username>/<repository-name>/<file-name>`: 
+<a href="https://cdn.jsdelivr.net/gh/jspsych/jsPsych/jspsych.js">https://cdn.jsdelivr.net/gh/jspsych/jsPsych/jspsych.js</a>.
+
+### Using the jsPsych GitHub files for the flanker task
+
+This jsPsych-in-Qualtrics repository has the files necessary to run the flanker task. 
+These files can be embedded via jSDelivr (github-username: `kywch`, repository-name: `jsPsych-in-Qualtrics`, experiment-folder: `flanker`). 
+You need eight files to run the flanker experiment.
+
+* `jspsych.css`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/css/jspsych.css">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/css/jspsych.css</a>
+* `jspsych.js`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/jspsych.js">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/jspsych.js</a>
+* `jspsych-html-keyboard-response.js`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js</a>
+* `jspsych-image-keyboard-response.js`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js</a>
+* `con1.png`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/con1.png">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/con1.png</a>
+* `con2.png`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/con2.png">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/con2.png</a>
+* `inc1.png`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/inc1.png">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/inc1.png</a>
+* `inc2.png`: <a href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/inc2.png">https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/img/inc2.png</a>
+
+---
+
+## First transformation: `demo-flanker-transformed.html` and `flanker_main.js`
+
+I prefer to separate out the experiment-related code from the operation-related code, following [the Experiment Factory](https://expfactory.github.io/experiments/) style. 
+If you haven't, please visit [the Experiment Factory library](https://expfactory.github.io/experiments/), which contain a ton of experiments with running demos and their code.
+
+In the `demo-flanker.html`, constructing the `timeline` can be considered to be experiment-related, 
+and the remaining parts that also appear in [the Hello-World example](hello-world.md), such as loading `jspsych.js` and `jsPsych.init()`, can be considered to be operation-related. 
+Here, I am separating the experiment-related code and the operation-related code and putting the code into `flanker_main.js` and `demo-flanker-transformed.html`, respectively, by following steps:
+
+### Step 1. Copy `demo-flanker.html` to `demo-flanker-transformed.html`
+
+### Step 2. Create a new file `flanker_main.js`
+
+And open `flanker_main.js` in a new editor window.
+
+### Step 3. Cut and paste the experiment-related code
+
+Open `demo-flanker-transformed.html`. You should have both `flanker_main.js` and `demo-flanker-transformed.html` opened.
+
+Select the code from the `/* experiment parameters */` line to the `timeline.push(debrief_block);` line, **cut the selection**, and paste it to `flanker_main.js`. **REPEAT**. The code is being **cut-and-pasted** (NOT copy-pasted). 
+
+```js
+/* experiment parameters */
+var reps_per_trial_type = 4;
+
 /*set up welcome block*/
 var welcome = {
   type: "html-keyboard-response",
@@ -61,99 +101,7 @@ var instructions = {
     "<p>Press any key to begin.</p>",
   post_trial_gap: 1000
 };
-```
 
-Both blocks need to be added to the timeline of the experiment.
-
-```javascript
-var timeline = [];
-timeline.push(welcome);
-timeline.push(instructions);
-```
-
-Finally, we need to initiate the experiment by adding this piece of code at the bottom:
-
-```javascript
-jsPsych.init({
-    timeline: timeline,
-    on_finish: function() {
-        jsPsych.data.displayData();
-    }
-);
-```
-
-If you are unsure about any of this, go back to the [tutorial for running a simple reaction time task]
-(https://www.jspsych.org/tutorials/rt-task/).
-
-### The code so far:
-
-```html
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Flanker Task</title>
-    <script src="jspsych-6.1.0/jspsych.js"></script>
-    <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
-    <link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css">
-</head>
-
-<body>
-</body>
-
-<script>
-    /*set up welcome block*/
-    var welcome = {
-        type: "html-keyboard-response",
-        stimulus: "Welcome to the experiment. Press any key to begin."
-    };
-
-    /*set up instructions block*/
-    var instructions = {
-        type: "html-keyboard-response",
-        stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>" +
-            "<img src='img/inc1.png'></img>" +
-            "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>" +
-            "<p>Press the right arrow key if the middle arrow is pointing right. (>)</p>" +
-            "<p>Press any key to begin.</p>",
-        post_trial_gap: 1000
-    };
-
-    /*set up experiment structure*/
-    var timeline = [];
-    timeline.push(welcome);
-    timeline.push(instructions);
-
-    /*start experiment*/
-    jsPsych.init({
-        timeline: timeline,
-        on_finish: function () {
-            jsPsych.data.displayData();
-        }
-    });
-</script>
-
-</html>
-```
-
-If you run this code in your browser, you should see the welcome message as well as the instructions. Next, we need to
-define which stimuli we are going to use for the experiment.
-
----
-
-## Part 3: Defining the stimuli
-
-For this experiment we are using four image files which are stored in the `img` folder. 
-First, we need to define them as being the `test_stimuli` we want to use. 
-At the same time, we can also define specific attributes per stimulus. 
-For instance, we might want to keep track of the congruency of the stimuli, regardless of the direction in which they are pointing. 
-To do this, we don't just define the location of the stimulus image in the `stimulus`, but also an additional attribute in the `data` line. 
-Note that this information will automatically be stored in your result file. 
-You can add whatever extra information you might need here.
-For example, `stim_type` and `direction` are added here to make the analysis easier.
-
-```javascript
 /*defining stimuli*/
 var test_stimuli = [
   {
@@ -173,55 +121,6 @@ var test_stimuli = [
     data: { stim_type: 'incongruent', direction: 'left'}
   }
 ];
-```
-
-Now that we have defined our stimuli, we want them to be displayed and repeated in a random order. 
-This can easily be
-done by using the randomisation code implemented in jsPsych. We simply create a variable which we call `all_trials`
-that is going to display each stimulus <em>x</em> times, <em>x</em> being the number you define. Let's say we want a
-100-trial experiment:
-
-```javascript
-var all_trials = jsPsych.randomization.repeat(test_stimuli, 25);
-```
-
-We also want the inter-stimulus interval to be variable, so we define a `post_trial_gap`. This will use a random value
-between 1000 and 2000 ms, with uniform sampling from the range. Again, you can modify these parameters as you please.
-
-```javascript
-var post_trial_gap = function() {
-    return Math.floor(Math.random() * 1500) + 500;
-};
-```
-
----
-
-## Part 4: Creating an experimental block
-
-So far, we have set up a welcome message, an instructions block, and the stimuli for our experiment. 
-Now comes the most important part, that is, creating the `timeline` in the `test` block. 
-For details of `jsPsych.timelineVariable`, see [the jsPsych tutorial on timeline](https://www.jspsych.org/overview/timeline/#timeline-variables). 
-
-* `type`: It is supported by the `image-keyboard-response` plugin, so this information needs to go in first.
-* `choices`: Then, we defined the left and right arrow of the keyboard as our response keys, so their keycodes (37 and 39; look up your required keycodes 
-[here](http://www.asquare.net/javascript/tests/KeyCode.html)) need to be defined here. 
-* `trial_duration`: We want each stimulus to be presented for 1500 ms at most, which should be defined here in ms. 
-* `stimulus` and `data`: The `test_stimuli` defined above is referenced in the `timeline_variables`, 
-and the `stimulus` and `data` defined in the `test_stimuli` are fed into the plugin via the `jsPsych.timelineVariable` function 
-(see [the tutorial](https://www.jspsych.org/overview/timeline/#timeline-variables)).
-* `sample`: At the same time, the number and type of trials are defined via `sample` (see [the jsPsych tutorial on sampling](https://www.jspsych.org/overview/timeline/#repeating-each-trial-a-fixed-number-of-times-in-a-random-order)).
-This timeline contains 4 repetitions (as defined in `reps_per_trial_type`) of 4 different trials types (as defined in `test_stimuli`)
-* `on_finish`: When a trial finishes, its `data` is passed to be examined right away. 
-Here, the code compares the response (`data.key_press` and `data.rt`) with the stimulus (`data.direction`) and records `data.correct` variable.
-For example, whenever a congruent stimulus was displayed and the left arrow key was pressed <em>or</em> 
-an incongruent stimulus was displayed and the right arrow key was pressed (and neither of those reactions was later than the 1500 ms limit we defined earlier), 
-the program returns the information that these are correct trials.
-* `post_trial_gap`: This code generates a jittered inter-trial interval between 500 - 2000 ms.
-
-
-```javascript
-/* experiment parameters */
-var reps_per_trial_type = 4;
 
 /* defining test timeline */
 var test = {
@@ -250,141 +149,7 @@ var test = {
     size: reps_per_trial_type
   }
 };
-```
 
-Of course, this block also needs to be added to the experiment's timeline:
-
-```javascript
-timeline.push(test);
-```
-
-###The code so far:
-
-```html
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Flanker Task</title>
-  <script src="jspsych-6.1.0/jspsych.js"></script>
-  <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
-  <script src="jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
-  <link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css">
-</head>
-
-<body>
-</body>
-<script>
-  /* experiment parameters */
-  var reps_per_trial_type = 4;
-
-  /*set up welcome block*/
-  var welcome = {
-    type: "html-keyboard-response",
-    stimulus: "Welcome to the experiment. Press any key to begin."
-  };
-
-  /*set up instructions block*/
-  var instructions = {
-    type: "html-keyboard-response",
-    stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>" +
-      "<img src='img/inc1.png'></img>" +
-      "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>" +
-      "<p>Press the right arrow key if the middle arrow is pointing right. (>)</p>" +
-      "<p>Press any key to begin.</p>",
-    post_trial_gap: 1000
-  };
-
-  /*defining stimuli*/
-  var test_stimuli = [{
-      stimulus: "img/con1.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'left'
-      }
-    },
-    {
-      stimulus: "img/con2.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'right'
-      }
-    },
-    {
-      stimulus: "img/inc1.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'right'
-      }
-    },
-    {
-      stimulus: "img/inc2.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'left'
-      }
-    }
-  ];
-
-  /* defining test timeline */
-  var test = {
-    timeline: [{
-      type: 'image-keyboard-response',
-      choices: [37, 39],
-      trial_duration: 1500,
-      stimulus: jsPsych.timelineVariable('stimulus'),
-      data: jsPsych.timelineVariable('data'),
-      on_finish: function (data) {
-        var correct = false;
-        if (data.direction == 'left' && data.key_press == 37 && data.rt > -1) {
-          correct = true;
-        } else if (data.direction == 'right' && data.key_press == 39 && data.rt > -1) {
-          correct = true;
-        }
-        data.correct = correct;
-      },
-      post_trial_gap: function () {
-        return Math.floor(Math.random() * 1500) + 500;
-      }
-    }],
-    timeline_variables: test_stimuli,
-    sample: {
-      type: 'fixed-repetitions',
-      size: reps_per_trial_type
-    }
-  };
-
-  /*set up experiment structure*/
-  var timeline = [];
-  timeline.push(welcome);
-  timeline.push(instructions);
-  timeline.push(test);
-
-  /*start experiment*/
-  jsPsych.init({
-    timeline: timeline,
-    on_finish: function () {
-      jsPsych.data.displayData();
-    }
-  });
-</script>
-
-</html>
-```
-
----
-
-## Part 5: Presenting feedback to the participants
-
-Running the experiment now will provide you with a welcome message, instructions, and 16 trials. We would like to give
-the participants feedback about their performance at the end of the experiment. 
-[The jsPsych Reaction Time task also does this](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation),
-and the tutorial explains this very well in the [Part 11: Data aggregation](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation).
-
-This debriefing block shows the accuracy, mean RT for congruent trials, and mean RT for incongruent trials.
-Don't forget to add this block to the timeline as well!
-
-```javascript
 /*defining debriefing block*/
 var debrief = {
   type: "html-keyboard-response",
@@ -409,214 +174,386 @@ var debrief = {
       "<p>Press any key to complete the experiment. Thank you!</p>";
   }
 };
+
+/*set up experiment structure*/
+var timeline = [];
+timeline.push(welcome);
+timeline.push(instructions);
+timeline.push(test);
+timeline.push(debrief);
 ```
 
+### Step 4. `flanker_main.js`: Use the GitHub-hosted stimuli images
 
-(Note: This was already part of the [basic tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation)). We first need to
-modify our `test_block` a bit to define what a correct trial is.
+Let's use [the above images](flanker.md#using-the-jspsych-github-files-for-the-flanker-task) hosted in the GitHub. 
 
-```javascript
-var test_block = {
-  type: 'single-stim',
-  choices: [37, 39],
-  timing_response: 1500,
-  on_finish: function(data){
-      var correct = false;
-      if(data.phase == 'congruent' &&  data.key_press == '37' && data.rt > -1){
-        correct = true;
-      } else if(data.phase == 'incongruent' && data.key_press == '39' && data.rt > -1){
-        correct = true;
-      }
-      jsPsych.data.addDataToLastTrial({correct: correct});
-    },
-  timeline: all_trials,
-  timing_post_trial: post_trial_gap
+The `flanker_main.js` in this tutorial has a few changes to do so. Let's see these changes.
+
+#### Change 1: Adding the image hosting site
+
+The `repo_site` variable was added to locate the JSDELIVR site that hosts stimuli images. You can easily use your repository by changing this line.
+
+```js
+// Use JSDELIVR to get the files from a GitHub repository
+// https://cdn.jsdelivr.net/gh/<github-username>/<repository-name>/<specific folder or file>
+var repo_site = "https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/";
+```
+
+#### Change 2: Adding `repo_site` in `instructions`
+
+The `repo_site` variable should be added to wherever `img/con1.png`, `img/con2.png`, `img/inc1.png`, and `img/inc2.png` are used like the below. 
+The `find` function really helps in doing so.
+
+```js
+var instructions = {
+  type: "html-keyboard-response",
+  stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>" +
+    "<img src='" + repo_site + "img/inc1.png'></img>" +
+    "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>" +
+    "<p>Press the right arrow key if the middle arrow is pointing right. (>)</p>" +
+    "<p>Press any key to begin.</p>",
+  post_trial_gap: 1000
 };
 ```
 
-Essentially, what we're doing here is saying that whenever a congruent stimulus was displayed and the left arrow key
-was pressed <em>or</em> an incongruent stimulus was displayed and the right arrow key was pressed (and neither of those
-reactions was later than the 1500 ms limit we defined earlier), the program returns the information that these are
-correct trials.
+#### Change 3: Adding `repo_site` in `test_stimuli`
 
-We want to display both the percentage of correct responses as well as the mean reaction time. For this, we need to add
-the following function to the code:
-
-```javascript
-function getSubjectData() {
-
-  var trials = jsPsych.data.getTrialsOfType('single-stim');
-
-  var sum_rt = 0;
-  var correct_trial_count = 0;
-  var correct_rt_count = 0;
-  for (var i = 0; i < trials.length; i++) {
-    if (trials[i].correct == true) {
-      correct_trial_count++;
-      if(trials[i].rt > -1){
-        sum_rt += trials[i].rt;
-        correct_rt_count++;
-      }
-    }
+```js
+var test_stimuli = [
+  {
+    stimulus: repo_site + "img/con1.png",
+    data: { stim_type: 'congruent', direction: 'left'}
+  },
+  {
+    stimulus: repo_site + "img/con2.png",
+    data: { stim_type: 'congruent', direction: 'right'}
+  },
+  {
+    stimulus: repo_site + "img/inc1.png",
+    data: { stim_type: 'incongruent', direction: 'right'}
+  },
+  {
+    stimulus: repo_site + "img/inc2.png",
+    data: { stim_type: 'incongruent', direction: 'left'}
   }
-  return {
-    rt: Math.floor(sum_rt / correct_rt_count),
-    accuracy: Math.floor(correct_trial_count / trials.length * 100)
-  }
-};
-```
-Finally, we add a debriefing block which is displayed after the last trial of the experiment. Don't forget to add this
-block to the timeline as well!
-
-```javascript
-var debrief_block = {
-  type: "text",
-  text: function() {
-    var subject_data = getSubjectData();
-    return "<p style='margin:20%'>You responded correctly on "+subject_data.accuracy+"% of the trials. " +
-    "Your average response time was <strong>" + subject_data.rt + "ms</strong>. Press any key to complete the "+
-    "experiment. Thank you!</p>";
-  }
-};
-
-timeline.push(debrief_block);
+];
 ```
 
-### The final code:
+### Step 5. `demo-flanker-transformed.html`: Import `flanker_main.js`
+
+Cutting the experiment-related code makes the `demo-flanker-transformed.html` file much shorter. 
+
+Let's also use [the above JS and CSS files](flanker.md#using-the-jspsych-github-files-for-the-flanker-task) hosted in the GitHub. 
+In addition, you also need to load `flanker_main.js` by using a `<script>` tag like the other jspsych plugin files (see [the original jsPsych tutorial](https://www.jspsych.org/tutorials/hello-world/#step-6-use-the-jspsych-html-keyboard-response-plugin-to-print-a-message)).
+
+You can use your own repository by creating the jsDelivr link by following [this guide](https://www.jsdelivr.com/?docs=gh).
+
+#### CHANGE 1: Using the GitHub-hosted JS and CSS files
+
 ```html
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Flanker Task</title>
-  <script src="jspsych-6.1.0/jspsych.js"></script>
-  <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
-  <script src="jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
-  <link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css">
-</head>
-
-<body>
-</body>
-<script>
-  /* experiment parameters */
-  var reps_per_trial_type = 4;
-
-  /*set up welcome block*/
-  var welcome = {
-    type: "html-keyboard-response",
-    stimulus: "Welcome to the experiment. Press any key to begin."
-  };
-
-  /*set up instructions block*/
-  var instructions = {
-    type: "html-keyboard-response",
-    stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>" +
-      "<img src='img/inc1.png'></img>" +
-      "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>" +
-      "<p>Press the right arrow key if the middle arrow is pointing right. (>)</p>" +
-      "<p>Press any key to begin.</p>",
-    post_trial_gap: 1000
-  };
-
-  /*defining stimuli*/
-  var test_stimuli = [{
-      stimulus: "img/con1.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'left'
-      }
-    },
-    {
-      stimulus: "img/con2.png",
-      data: {
-        stim_type: 'congruent',
-        direction: 'right'
-      }
-    },
-    {
-      stimulus: "img/inc1.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'right'
-      }
-    },
-    {
-      stimulus: "img/inc2.png",
-      data: {
-        stim_type: 'incongruent',
-        direction: 'left'
-      }
-    }
-  ];
-
-  /* defining test timeline */
-  var test = {
-    timeline: [{
-      type: 'image-keyboard-response',
-      choices: [37, 39],
-      trial_duration: 1500,
-      stimulus: jsPsych.timelineVariable('stimulus'),
-      data: jsPsych.timelineVariable('data'),
-      on_finish: function (data) {
-        var correct = false;
-        if (data.direction == 'left' && data.key_press == 37 && data.rt > -1) {
-          correct = true;
-        } else if (data.direction == 'right' && data.key_press == 39 && data.rt > -1) {
-          correct = true;
-        }
-        data.correct = correct;
-      },
-      post_trial_gap: function () {
-        return Math.floor(Math.random() * 1500) + 500;
-      }
-    }],
-    timeline_variables: test_stimuli,
-    sample: {
-      type: 'fixed-repetitions',
-      size: reps_per_trial_type
-    }
-  };
-
-  /*defining debriefing block*/
-  var debrief = {
-    type: "html-keyboard-response",
-    stimulus: function () {
-      var total_trials = jsPsych.data.get().filter({
-        trial_type: 'image-keyboard-response'
-      }).count();
-      var accuracy = Math.round(jsPsych.data.get().filter({
-        correct: true
-      }).count() / total_trials * 100);
-      var congruent_rt = Math.round(jsPsych.data.get().filter({
-        correct: true,
-        stim_type: 'congruent'
-      }).select('rt').mean());
-      var incongruent_rt = Math.round(jsPsych.data.get().filter({
-        correct: true,
-        stim_type: 'incongruent'
-      }).select('rt').mean());
-      return "<p>You responded correctly on <strong>" + accuracy + "%</strong> of the trials.</p> " +
-        "<p>Your average response time for congruent trials was <strong>" + congruent_rt + "ms</strong>.</p>" +
-        "<p>Your average response time for incongruent trials was <strong>" + incongruent_rt + "ms</strong>.</p>" +
-        "<p>Press any key to complete the experiment. Thank you!</p>";
-    }
-  };
-
-  /*set up experiment structure*/
-  var timeline = [];
-  timeline.push(welcome);
-  timeline.push(instructions);
-  timeline.push(test);
-  timeline.push(debrief);
-
-  /*start experiment*/
-  jsPsych.init({
-    timeline: timeline,
-    on_finish: function () {
-      jsPsych.data.displayData();
-    }
-  });
-</script>
-
-</html>
+<!-- CHANGE 1: Using the GitHub-hosted files -->
+<script src="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/jspsych.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/css/jspsych.css">
 ```
+
+#### CHANGE 2: Loading the GitHub-hosted main experiment script
+
+```html
+<!-- CHANGE 2: Loading the GitHub-hosted main experiment script -->
+<script src="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/flanker_main.js"></script> 
+```
+
+### Does this work?
+
+Let's find out by opening `demo-flanker.html` in a browser. 
+
+
+
+### Step 6: Upload `demo-simple-rt-task-transformed.html` and `rt-task_main.js` to GitHub
+
+If this works, let's upload `demo-simple-rt-task-transformed.html` and `rt-task_main.js` to your GitHub repository so that your task also runs over the Internet.
+
+After uploading both scripts (and waiting for a few minutes), you should be able to access `https://<your-github-username>.github.io/<your-experiment-name>/demo-simple-rt-task-transformed.html`. For example, <a href='https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task-transformed.html'>https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task-transformed.html</a>.
+
+If the above link works, then it also means that the experiment-related code, `rt-task_main.js`, is also available for Qualtrics to load. You can actually access it by going to `https://<your-github-username>.github.io/<your-experiment-name>/rt-task_main.js`. For example, <a href='https://kywch.github.io/Simple-RT-Task/rt-task_main.js'>https://kywch.github.io/Simple-RT-Task/rt-task_main.js</a>.
+
+---
+
+## Second transformation: `demo-simple-rt-task-transformed-with-display-element.html`
+
+Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `demo-simple-rt-task-transformed-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-transformed-with-display-element.html) contains three changes from the `demo-simple-rt-task-transformed.html`. When you open `demo-simple-rt-task-transformed-with-display-element.html` in a browser, you should see the same reaction time task. 
+
+Let's look at each change.
+
+### Change 1: Using `display_element` 
+
+By adding the `display_element` parameter in the `jsPsych.init()` like below, jsPsych will render the experiment in the `<div>` called `display_stage`, which the current script does not have yet. So, let's add the `display_stage`.
+
+```js
+/* start the experiment */
+jsPsych.init({
+timeline: timeline,
+/* Change 1: Using `display_element` */
+display_element: 'display_stage',
+on_finish: function () {
+    jsPsych.data.displayData();
+}
+});
+```
+
+### Change 2: Adding `display_stage` CSS and Div
+
+The `display_stage` needs below CSS and HTML code after the `<body>` tag, which also include the `display_stage_background`. Both are necessary to function well.
+
+```html
+<style>
+    #display_stage_background {
+        width: 100vw;
+        background-color: white;
+        z-index: -1;
+    }
+
+    #display_stage {
+        position: fixed;
+        left: 1vw;
+        top: 1vh;
+        height: 98vh;
+        width: 98vw;
+        background-color: white;
+        box-shadow: 1px 1px 1px #999;
+        border-radius: 15px;
+        z-index: 0;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+</style>
+
+<div id='display_stage_background'></div>
+<div id='display_stage'></div>
+```
+
+### Change 3: Adding extra scripts for Qualtrics
+
+The below scripts are not necessary to run this reaction time experiment, but you need to copy-paste these in Qualtrics later. 
+
+One critical point is that now we use the jsPsych stylesheet hosted in the GitHub Pages (explained above in the [Hosting jsPsych](rt-task.md#step-4-enable-github-pages-for-your-experiment) section) instead of the CSS file in your computer. This is important because Qualtrics can also access the GitHub-hosted files.
+
+```html
+<!-- Change 3: Adding extra scripts for Qualtrics -->
+<!-- jspsych.css should be availble from your GitHub at 
+    https://<your-github-username>.github.io/<your-experiment-name>/jspsych-6.1.0/css/jspsych.css -->
+<link href="https://kywch.github.io/Simple-RT-Task/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+<div>
+    <span style="font-size: 24px;">
+    <br><br>
+    If you are seeing this message for <span style="color: rgb(255, 0, 0);"><b>more than 5 minutes</b></span>,<br>
+    please screen-capture this screen and send the image to us.
+    <br><br>
+    <span style="font-size: 28px;">We are very sorry for the inconvenience.</span>
+    </span>
+</div>
+```
+
+---
+
+## Third transformation: `demo-simple-rt-task-qualtrics.js`
+
+To make your jsPsych experiment work in Qualtrics, you need to add your code to the below skeleton provided by Qualtrics Question JavaScript Editor. For details, see the [Add JavaScript help page](https://www.qualtrics.com/support/survey-platform/survey-module/question-options/add-javascript/).
+
+```js
+Qualtrics.SurveyEngine.addOnload(function()
+{
+	/*Place your JavaScript here to run when the page loads*/
+
+});
+
+Qualtrics.SurveyEngine.addOnReady(function()
+{
+	/*Place your JavaScript here to run when the page is fully displayed*/
+
+});
+
+Qualtrics.SurveyEngine.addOnUnload(function()
+{
+	/*Place your JavaScript here to run when the page is unloaded*/
+
+});
+```
+
+The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-qualtrics.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
+
+By separating the experiment-related code from the operation-related code, converting the html file to Qualtrics JavaScript function is pretty much similar to [the Hello-World example](hello-world.md#second-transformation-qualtricsjs).
+
+Let's look at each change.
+
+### Change 1: Hide the Next button
+
+The below javascript code hides the Next button and puts the javascript code in the driving seat.
+
+```js
+// Retrieve Qualtrics object and save in qthis
+var qthis = this;
+
+// Hide buttons
+qthis.hideNextButton();
+```
+
+### Change 2: Define and load required resources
+
+The below javascript defines where the necessary files are so that Qualtrics can load these. If you enabled GitHub Pages of your repository, Qualtrics can load the necessary JS, CSS, and image files right away.
+
+One way to check whether these files are accessilbe is to view the source of `demo-simple-rt-task-transformed.html` and click the imported scripts. For example of `jspsych.js`, <a href='https://kywch.github.io/Simple-RT-Task/jspsych-6.1.0/jspsych.js'>https://your-github-username.github.io/your-experiment-name/jspsych-6.1.0/jspsych.js</a>.
+
+```js
+var task_github = "https://kywch.github.io/Simple-RT-Task/"; // https://<your-github-username>.github.io/<your-experiment-name>
+
+// requiredResources must include all the JS files that demo-simple-rt-task-transformed.html uses.
+var requiredResources = [
+    task_github + "jspsych-6.1.0/jspsych.js",
+    task_github + "jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js",
+    task_github + "jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js",
+    task_github + "rt-task_main.js"
+];
+
+function loadScript(idx) {
+    console.log("Loading ", requiredResources[idx]);
+    jQuery.getScript(requiredResources[idx], function () {
+        if ((idx + 1) < requiredResources.length) {
+            loadScript(idx + 1);
+        } else {
+            initExp();
+        }
+    });
+}
+
+if (window.Qualtrics && (!window.frameElement || window.frameElement.id !== "mobile-preview-view")) {
+    loadScript(0);
+}
+```
+
+### Change 3: Append the display_stage Div using jQuery
+
+In Qualtrics, jQuery (loaded by default) is used to append the `display_stage_background` and `display_stage` Divs. The CSS for these elements will be added directly to Question HTML later in this tutorial.
+
+```js
+// jQuery is loaded in Qualtrics by default
+jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
+jQuery("<div id = 'display_stage'></div>").appendTo('body');
+```
+
+### Change 4: Wrap jsPsych.init() in a function
+
+The main experiment codes are wrapped in the `initExp` function to make sure it runs after all the necessary library and plugin files are loaded (as defined in the `loadScript` function above).
+
+### Change 5: Summarize and save the results to Qualtrics
+
+[The original jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
+
+Well, you can actually do this by summarizing the results online and save those results in [Qualtrics' Embedded Data](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) using the [setEmbeddedData](https://s.qualtrics.com/WRAPI/QuestionAPI/classes/Qualtrics%20JavaScript%20Question%20API.html#method_setEmbeddedData) function.
+
+`demo-simple-rt-task-qualtrics.js` does so when the jsPsych experiment finishes by running the below code (from [`debrief_block`](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation)).
+
+```js
+jsPsych.init({
+    timeline: timeline,
+    display_element: 'display_stage',
+    on_finish: function (data) {
+        /* Change 6: Summarize and save the results to Qualtrics */
+        // summarize the results
+        var trials = jsPsych.data.get().filter({
+            test_part: 'test'
+        });
+        var correct_trials = trials.filter({
+            correct: true
+        });
+        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+        var rt = Math.round(correct_trials.select('rt').mean());
+
+        // save to qualtrics embedded data
+        Qualtrics.SurveyEngine.setEmbeddedData("accuracy", accuracy);
+        Qualtrics.SurveyEngine.setEmbeddedData("rt", rt);
+
+        /* Change 7: Add the clean up and continue functions.*/
+        // clear the stage
+        jQuery('display_stage').remove();
+        jQuery('display_stage_background').remove();
+
+        // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
+        qthis.clickNextButton();
+    }
+});
+```
+
+### Change 6: Add the clean up and continue functions
+
+When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. Then, execulte the `clickNextButton` to simulate clicking the Next button and proceed to the next question.
+
+---
+
+## Finally, embedding jsPsych in Qualtrics
+
+Let's log in to Qualtrics and take a look at each step.
+
+### Step 1. Create a new Qualtrics project and then a new question
+
+This tutorial assumes that readers are much more familiar with Qualtrics. For Qualtrics tutorial, there are other excellent tutorials available like [this Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/).
+
+To continue, please create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
+
+![Add JavaScript to a Qualtrics question](img/hello-world-qualtrics-Step1_add_javascript_to_question.jpg)
+
+### Step 2. Open the Question JavaScript editor and copy paste the whole `demo-simple-rt-task-qualtrics.js`
+
+Keep going in the above picture. (2) Click the gear to open the dropdown menu, and then (3) find and click **Add JavaScript**.
+
+![Open the Question JavaScript editor](img/hello-world-qualtrics-Step2_open_javascript_editor.jpg)
+
+### Step 3. Open the Question HTML editor and copy paste the portion of `demo-simple-rt-task-transformed-with-display-element.html`
+
+The Change 3 section of the `demo-simple-rt-task-transformed-with-display-element.html` file contains the link to jsPsych CSS file, the inline styles for `display_stage` Div, and the error message to be displayed when things go wrong.
+
+To open the HTML editor, click the `HTML View` button. 
+
+![Open the Question HTML editor](img/hello-world-qualtrics-Step3_open_question_html_editor.jpg)
+
+Then, copy paste the portion of `demo-simple-rt-task-transformed-with-display-element.html` to the HTML editor, starting from `<!-- COPY PASTE TO QUALTRICS FROM HERE -->` to `<!-- COPY PASTE TO QUALTRICS UP TO HERE -->`. After copy pasting, you should see something like below.
+
+![After copy-paste](img/hello-world-qualtrics-Step3_after_copy_paste.jpg)
+
+### Step 4. Creating Embedded Data elements
+
+To store the experiment results -- **accuracy** and **rt** -- in Qualtrics, you need to create the Embedded Data elements named **accuracy** and **rt** in your survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#CreatingAnEmbeddedDataElement).
+
+1. Click **Survey Flow** from the Survey tab
+2. Click **Add a New Element Here**
+3. Choose **Embedded Data** 
+4. Click **Create New Field or Choose From Dropdown** and type **accuracy**
+5. Click **Set a Value Now** and type -1
+6. Click **Add a New Field** and type **rt**
+7. Click **Set a Value Now** and type -1
+
+### Step 5. Move `Set Embedded Data` block to the top of Survey Flow
+
+The `accuracy` and `rt` fields should be defined before the jsPsych reaction time task, so you need to move the Embedded Data block to the **top** of the Survey Flow.
+
+Click and hold down **Move** to drag the Embedded Data to the top of the Survey Flow. After this, you should see the Survey Flow like below.
+
+![Move Embedded Data to the top](img/rt-task-qualtrics-Step5_move_block.jpg)
+
+### Step 6. Add a check for the Embedded Data
+
+You should make sure that the experiment results are saved correctly. You can do so by showing the `accuracy` and `rt` Embedded Data after the reaction task.
+
+1. Click **Add Page Break**
+2. Click **Create a New Question**
+3. Change Question Type to **Text/Graphic**
+4. Type `${e://Field/accuracy}` and `${e://Field/rt}` to access these Embedded Data
+
+![Show Embedded Data](img/rt-task-qualtrics-Step6_show_data.jpg)
+
+### Step 7. Publish and test!
+
+Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-publishing-versions/#PublishingNew). Then, an anonymous Qualtrics link is generated. If you click this link, you should be able to see the same reaction time task running in Qualtrics. For example, try [this Qualtrics link](https://ssd.az1.qualtrics.com/jfe/form/SV_6hsqwxYekrbzvxP).
