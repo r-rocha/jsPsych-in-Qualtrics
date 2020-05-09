@@ -258,7 +258,7 @@ Of course, this block also needs to be added to the experiment's timeline:
 timeline.push(test);
 ```
 
-###The code so far:
+### The code so far:
 
 ```html
 <!DOCTYPE html>
@@ -482,7 +482,7 @@ var debrief_block = {
 timeline.push(debrief_block);
 ```
 
-### The final code:
+### [The final code](demo-flanker.html):
 ```html
 <!DOCTYPE html>
 <html>
