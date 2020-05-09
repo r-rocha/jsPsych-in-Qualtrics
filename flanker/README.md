@@ -173,8 +173,8 @@ var test_stimuli = [
 ## Part 4: Creating an experimental block
 
 So far, we have set up a welcome message, an instructions block, and the stimuli for our experiment. 
-**Now comes the most important part, that is, creating the `timeline` in the `test` block.**
-For details of `jsPsych.timelineVariable`, see [the jsPsych tutorial on timeline](https://www.jspsych.org/overview/timeline/#timeline-variables). 
+**<font color=red>Now comes the most important part, that is, creating the `timeline` in the `test` block.</font>**
+As you can see, there is a LOT packed in here.
 
 * `type`: It is supported by the `image-keyboard-response` plugin, so this information needs to go in first.
 * `choices`: Then, we defined the left and right arrow of the keyboard as our response keys, so their keycodes (37 and 39; look up your required keycodes 
