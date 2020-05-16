@@ -1,6 +1,7 @@
 # Embedding the jsPsych Flanker Task into Qualtrics
 
 Let's start from the `demo-flanker.html` in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html) and embed it to qualtrics. 
+For details of `demo-flanker.html`, please read [the separate tutorial in this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/tree/master/flanker).
 
 ---
 
@@ -43,7 +44,9 @@ If you see a GitHub file that you want to embed in your experiment, like [jspsyc
 you can use [jSDelivr](https://www.jsdelivr.com/?docs=gh) to fetch the file like `https://cdn.jsdelivr.net/gh/<github-username>/<repository-name>/<file-name>`: 
 <a href="https://cdn.jsdelivr.net/gh/jspsych/jsPsych/jspsych.js">https://cdn.jsdelivr.net/gh/jspsych/jsPsych/jspsych.js</a>.
 
-<font color=red>WARNING: if you are making changes, it takes up to 24 hours to show up. THUS NOT RECOMMENDED </font>
+<font color=red><b>WARNING: If you are developing your experiment and making frequent changes, 
+jsDelivr is NOT your best option because it takes up to 24 hours to serve the modified files.</b></font> 
+Read [How to use jsDelivr](https://www.freecodecamp.org/news/how-to-use-jsdelivr-e64e5590f66e/) to learn more about jsDelivr and Content Delivery Network (CDN) in general.
 
 ### Using this tutorial's GitHub files for the flanker task
 
@@ -573,3 +576,19 @@ You can do so by showing the `accuracy`, `congruent_rt`, and `incongruent_rt` Em
 ### Step 7. Publish and test!
 
 Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-publishing-versions/#PublishingNew). Then, an anonymous Qualtrics link is generated. If you click this link, you should be able to see the same reaction time task running in Qualtrics. For example, try [this Qualtrics link](https://ssd.az1.qualtrics.com/jfe/form/SV_enXPx66m9iOM6Sp).
+
+---
+
+## Do you also want to save the trial-by-trial data?
+
+### First, prepare unique participant IDs in Qualtrics.
+
+If you are not doing this already. Please refer to the below resources.
+
+* [Qualtrics.com: Assigning Randomized IDs to Respondents](https://www.qualtrics.com/support/survey-platform/common-use-cases-rc/assigning-randomized-ids-to-respondents/)
+* [Brown.edu: Use Qualtrics for Human Subject Research: Using Pre-Generated Participant IDs](https://ithelp.brown.edu/kb/articles/use-qualtrics-for-human-subject-research-using-pre-generated-participant-ids)
+* [Cloudresearch.com: WorkerID (And All MTurk Fields) Sent to Qualtrics](https://www.cloudresearch.com/resources/blog/workerid-and-all-mturk-fields-sent-to-qualtrics/)
+
+### Second, add the necessary variables/functions for saving
+
+Please refer to the [Saving Data with PHP tutorial](save-php.md).

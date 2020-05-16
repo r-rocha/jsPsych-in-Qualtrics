@@ -538,3 +538,19 @@ You should make sure that the experiment results are saved correctly. You can do
 ### Step 7. Publish and test!
 
 Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-publishing-versions/#PublishingNew). Then, an anonymous Qualtrics link is generated. If you click this link, you should be able to see the same reaction time task running in Qualtrics. For example, try [this Qualtrics link](https://ssd.az1.qualtrics.com/jfe/form/SV_6hsqwxYekrbzvxP).
+
+---
+
+## Do you also want to save the trial-by-trial data?
+
+### First, prepare unique participant IDs in Qualtrics.
+
+If you are not doing this already. Please refer to the below resources.
+
+* [Qualtrics.com: Assigning Randomized IDs to Respondents](https://www.qualtrics.com/support/survey-platform/common-use-cases-rc/assigning-randomized-ids-to-respondents/)
+* [Brown.edu: Use Qualtrics for Human Subject Research: Using Pre-Generated Participant IDs](https://ithelp.brown.edu/kb/articles/use-qualtrics-for-human-subject-research-using-pre-generated-participant-ids)
+* [Cloudresearch.com: WorkerID (And All MTurk Fields) Sent to Qualtrics](https://www.cloudresearch.com/resources/blog/workerid-and-all-mturk-fields-sent-to-qualtrics/)
+
+### Second, add the necessary variables/functions for saving
+
+Please refer to the [Saving Data with PHP tutorial](save-php.md).
