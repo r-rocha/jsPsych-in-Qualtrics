@@ -5,7 +5,7 @@ You can save the aggregated data to Qualtrics, but you may also want to look at 
 
 ---
 
-## Step 0. Getting access to a web server
+## Step 0. Get access to a web server
 
 Your institution usually provides you a free access to a web server, so that you can run your personal web site.
 If you are not familiar with web servers and PHP, please please ask your IT professional for help. 
@@ -16,7 +16,7 @@ If you are not familiar with web servers and PHP, please please ask your IT prof
 
 ---
 
-## Step 1. Going into the `public_html` directory
+## Step 1. Go into the `public_html` directory
 
 If you have gained the access to a web server, login to the server and go to the `public_html` directory. If you are not sure, please read this page first: [Prerequisites for hosting web content on your account/how to setup your first PHP page](https://cse.unl.edu/faq-section/web-related).
 
@@ -28,7 +28,7 @@ $ cd ~/public_html
 
 ---
 
-## Step 2. Setting up the directories for saving experiment files
+## Step 2. Set up the directories for saving experiment files
 
 Let's create a directory called `exp_data`, which will host necessary files and serve as a parent directory for your experiments by running three separate commands one-by-one.
 
@@ -60,7 +60,7 @@ $ echo "DirectoryIndex index.html" >> .htaccess
 
 ---
 
-## Step 3. Creating the `save_data.php`
+## Step 3. Create the `save_data.php`
 
 Let's create the PHP file that will receive and save your data by using `vi`. If you are not familiar with `vi`, 
 please read [this guide for using the vi editor](https://www.cyberciti.biz/faq/linux-unix-vim-save-and-quit-command/).
@@ -118,7 +118,7 @@ If your script is running, you will see **Hello** in your browser.
 
 ---
 
-## Step 4. Making an experiment directory
+## Step 4. Make an experiment directory
 
 The above PHP script requires the experimenter to specify `data_dir`, in which experiment files are saved.
 Here, let's create a folder called `hello-world` under `exp_data` and save files there.
@@ -139,7 +139,7 @@ $ chmod 772 hello-world
 
 ---
 
-## Step 5. Adding the save function to the experiment HTML script
+## Step 5. Add the save function to the experiment HTML script
 
 The server side work is done. Now, you need to add scripts to send the result file when an experiment session is done.
 
@@ -360,25 +360,59 @@ So the `experiment-with-display-element-save-php.html` code looks like this. Thi
 
 ---
 
-## Step 6. Using the save function from Qualtrics
+## Step 6. Add Participand ID to Qualtrics
 
+Let's log in to Qualtrics. The basics of embedding jsPsych experiment into Qualtrics is explained in the [Embedding Hello World!](hello-world.md#finally-embedding-jspsych-in-qualtrics) page. 
+
+However, if you want to save the experiment data elsewhere, you must have the Participant ID so that you can link Qualtrics data and the experiment file later.
+In Qualtrics, you can keep or assign the participant ID using [Embedded Data elements](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#CreatingAnEmbeddedDataElement).
+
+The below steps will create the Embedded Data called `workerId`, which will hold the Participant ID. The value of `workerId` can be set from the Qualtrics survey URL (for details, see [Qualtrics.com: Setting values from the Survey URL](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#SettingValuesFromTheSurveyURL) and [Qualtrics.com: Passing information through query string](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/passing-information-through-query-strings/)). However, if `workerId` is not set, then Qualtrics will automatically generate a random Participant ID, ranging from PID10000 - PID99999, and use this ID to save data.
+
+I set the name of participant ID variable to be `workerId` because I have been using [Cloudresearch/TurkPrime](https://www.cloudresearch.com/) with Amazon MTurk, 
+and [Cloudresearch uses `workerId` to automatically add Mturk Worker ID](https://www.cloudresearch.com/resources/blog/workerid-and-all-mturk-fields-sent-to-qualtrics/). 
+However, other services suggest different field name -- for example, [Prolific suggests `PROLIFIC_PID`](https://researcher-help.prolific.co/hc/en-gb/articles/360009220993-Recording-participants-Prolific-IDs-in-your-study-survey) -- so how you name it is totally up to you.
+
+1. Click **Survey Flow** from the Survey tab
+2. Click **Add a New Element Here**
+3. Choose **Embedded Data** 
+4. Click **Create New Field or Choose From Dropdown** and type **workerId**. *<font color=red>WARNING: These fields are case sensitive. The I in Id is capitalized. All other letters are lower case.</font>*
+5. Click **Add Below** on this Set Embedded Data block
+6. Choose **Branch**
+7. Click **Add a Condition**
+8. Click **Question** --> choose **Embedded Data**
+9. Type in **workerId**
+10. Click **Is Equal to** --> choose **Is Empty**
+11. Click **Add a New Element Here** under the Branch block
+12. Choose **Embedded Data**
+13. Click **Create New Field or Choose From Dropdown** and type **workerId**.
+14. CLick **Set a Value Now**
+15. Type in **PID${rand://int/10000:99999}** --> This generates a random Participant ID between PID10000 and PID99999. For details, see [Qualtrics.com: Assigning Randomized IDs to Respondents](https://www.qualtrics.com/support/survey-platform/common-use-cases-rc/assigning-randomized-ids-to-respondents/).
+16. Click **Move** of the new blocks you created (`Set Embedded Data` and `Then Branch If`) and move these blocks the top of Survey Flow
+
+After these steps, you should see a screen like below.
+
+![Add Participant ID to Qualtrics](img/save-php-Step6_participant_id.jpg)
+
+---
+
+## Step 7. Use the save function from Qualtrics
 
 The `qualtrics-save-php.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics-save-php.js) contains additional changes from `qualtrics.js` and `experiment-with-display-element-save-php.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
 We start from `qualtrics.js`, which you can see from [the Hello World! tutorial](hello-world.md#second-transformation-qualtricsjs). 
 Let's look at these additional change.
 
-### Change 6: Define necessary variables and functions for saving the results
+### Change 6: Defining necessary variables and functions for saving the results
 
 The below javascript defines necessary variables and functions for saving the results.
+Importantly, this script will grab the Participant ID from the Embedded Data `workerId`, using the piped text `${e://Field/workerId}`, 
+and put it in the data file name.
 
 The above `save_data.php` expects three fields -- `data_dir`, `file_name`, and `exp_data` -- and will NOT work if any of these is missing.
 
 * `data_dir` specifies the server directory to store data. You may want to include `task_name` in the directory name.
-* `file_name` specifies the filename of the data being saved. You may want to include the subject id. For how to do so in Qualtrics, please see the below resources.
-    * [Qualtrics.com: Assigning Randomized IDs to Respondents](https://www.qualtrics.com/support/survey-platform/common-use-cases-rc/assigning-randomized-ids-to-respondents/)
-    * [Brown.edu: Use Qualtrics for Human Subject Research: Using Pre-Generated Participant IDs](https://ithelp.brown.edu/kb/articles/use-qualtrics-for-human-subject-research-using-pre-generated-participant-ids)
-    * [Cloudresearch.com: WorkerID (And All MTurk Fields) Sent to Qualtrics](https://www.cloudresearch.com/resources/blog/workerid-and-all-mturk-fields-sent-to-qualtrics/)
+* `file_name` specifies the filename of the data being saved. 
 * `exp_data` contains the full json/csv data to be saved.
 
 **<font color=red>You need to replace `save_url` with your save_data.php url.</font>**
@@ -386,7 +420,7 @@ The above `save_data.php` expects three fields -- `data_dir`, `file_name`, and `
 ```js
 // experimental session-defining variables
 var task_name = "hello-world";
-var sbj_id = "test01";
+var sbj_id = "${e://Field/workerId}";
 
 // you must put your save_data php url here.
 var save_url = "https://users.rcc.uchicago.edu/~kywch/exp_data/save_data.php";
@@ -422,9 +456,11 @@ function save_data_csv() {
 }
 ```
 
-### Change 7: Call the save function -- CHOOSE ONE!
+### Change 7: Calling the save function -- CHOOSE ONE!
 
 The save function was added inside `on_finish`, which is called once all trials in the experiment have been run.
+
+The participant ID, `sbj_id`, was added to the data itself, so that you can match the data file even when the file name is changed.
 
 **NOTE: Here, both `save_data_json()` and `save_data_csv()` were called to show how these can be used. Choose one.**
 
@@ -436,7 +472,11 @@ jsPsych.init({
     /* Change 5: Add the clean up and continue functions.*/
     on_finish: function (data) {
 
-        /* Change 7: Call the save function -- CHOOSE ONE! */
+        /* Change 7: Calling the save function -- CHOOSE ONE! */
+        // include the participant ID in the data
+        // this must be done before saving
+        jsPsych.data.get().addToLast({participant: sbj_id});        
+
         save_data_json();
         save_data_csv();
 
@@ -459,14 +499,14 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     /*Place your JavaScript here to run when the page loads*/
 
-    /* Change 1: Hide the Next button */
+    /* Change 1: Hiding the Next button */
     // Retrieve Qualtrics object and save in qthis
     var qthis = this;
 
     // Hide buttons
     qthis.hideNextButton();
 
-    /* Change 2: Define and load required resources */
+    /* Change 2: Defining and load required resources */
     var jslib_url = "https://kywch.github.io/jsPsych/";
 
     // the below urls must be accessible with your browser
@@ -491,15 +531,15 @@ Qualtrics.SurveyEngine.addOnload(function () {
         loadScript(0);
     }
 
-    /* Change 3: Append the display_stage Div using jQuery */
+    /* Change 3: Appending the display_stage Div using jQuery */
     // jQuery is loaded in Qualtrics by default
     jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
     jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
-    /* Change 6: Define necessary variables and functions for saving the results */
+    /* Change 6: Defining necessary variables and functions for saving the results */
     // experimental session-defining variables
     var task_name = "hello-world";
-    var sbj_id = "test01";
+    var sbj_id = "${e://Field/workerId}";
 
     // you must put your save_data php url here.
     var save_url = "https://users.rcc.uchicago.edu/~kywch/exp_data/save_data.php";
@@ -534,7 +574,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
         });
     }
 
-    /* Change 4: Wrap jsPsych.init() in a function */
+    /* Change 4: Wrapping jsPsych.init() in a function */
     function initExp() {
 
         var hello_trial = {
@@ -546,10 +586,14 @@ Qualtrics.SurveyEngine.addOnload(function () {
             timeline: [hello_trial],
             display_element: 'display_stage',
 
-            /* Change 5: Add the clean up and continue functions.*/
+            /* Change 5: Adding the clean up and continue functions.*/
             on_finish: function (data) {
 
-                /* Change 7: Call the save function -- CHOOSE ONE! */
+                /* Change 7: Calling the save function -- CHOOSE ONE! */
+                // include the participant ID in the data
+                // this must be done before saving
+                jsPsych.data.get().addToLast({participant: sbj_id});
+
                 save_data_json();
                 save_data_csv();
 
@@ -573,6 +617,28 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
     /*Place your JavaScript here to run when the page is unloaded*/
 
 });
-
 ```
 
+---
+
+## Step 8. Download the data
+
+When your experiment is done, you can easily download the result files with the following steps.
+
+First, log in to your account. Then, this command takes you to the `exp_data` that you made.
+```sh
+$ cd ~/public_html/exp_data
+```
+
+This command compresses the directory with the result files (in this case `hello-world`).
+You need to replace `hello-world` with your own experiment/directory.
+```sh
+$ zip -r hello-world.zip hello-world
+```
+
+You can access the zipped file through your web-browser by going to `https://<server-url>/~<your-account>/exp_data/hello-world.zip`, like my url -- [https://users.rcc.uchicago.edu/~kywch/exp_data/hello-world.zip](https://users.rcc.uchicago.edu/~kywch/exp_data/hello-world.zip).
+
+After downloading the zipped file, you may want to delete it.
+```sh
+$ rm hello-world.zip
+```

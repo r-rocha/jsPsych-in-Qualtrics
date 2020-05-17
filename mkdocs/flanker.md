@@ -396,7 +396,7 @@ By separating the experiment-related code from the operation-related code, conve
 
 Let's look at each change.
 
-### Change 1: Hide the Next button
+### Change 1: Hiding the Next button
 
 The below javascript code hides the Next button and puts the javascript code in the driving seat.
 
@@ -408,7 +408,7 @@ var qthis = this;
 qthis.hideNextButton();
 ```
 
-### Change 2: Define and load required resources
+### Change 2: Defining and load required resources
 
 The below javascript defines where the necessary files are so that Qualtrics can load these. If you enabled GitHub Pages of your repository, Qualtrics can load the necessary JS, CSS, and image files right away. Or, you can provide the embeddable links via jsDelivr. Here, let's continue to use jsDelivr.
 
@@ -442,7 +442,7 @@ if (window.Qualtrics && (!window.frameElement || window.frameElement.id !== "mob
 }
 ```
 
-### Change 3: Append the display_stage Div using jQuery
+### Change 3: Appending the display_stage Div using jQuery
 
 In Qualtrics, jQuery (loaded by default) is used to append the `display_stage_background` and `display_stage` Divs. The CSS for these elements will be added directly to Question HTML later in this tutorial.
 
@@ -452,11 +452,11 @@ jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
 jQuery("<div id = 'display_stage'></div>").appendTo('body');
 ```
 
-### Change 4: Wrap jsPsych.init() in a function
+### Change 4: Wrapping jsPsych.init() in a function
 
 The main experiment codes are wrapped in the `initExp` function to make sure it runs after all the necessary library and plugin files are loaded (as defined in the `loadScript` function above).
 
-### Change 5: Summarize and save the results to Qualtrics
+### Change 5: Summarizing and save the results to Qualtrics
 
 [The jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
 
@@ -469,7 +469,7 @@ jsPsych.init({
     timeline: timeline,
     display_element: 'display_stage',
     on_finish: function (data) {
-        /* Change 5: Summarize and save the results to Qualtrics */
+        /* Change 5: Summarizing and save the results to Qualtrics */
         // summarize the results
         var total_trials = jsPsych.data.get().filter({
             trial_type: 'image-keyboard-response'
@@ -491,7 +491,7 @@ jsPsych.init({
         Qualtrics.SurveyEngine.setEmbeddedData("congruent_rt", congruent_rt);
         Qualtrics.SurveyEngine.setEmbeddedData("incongruent_rt", incongruent_rt);
 
-        /* Change 6: Add the clean up and continue functions.*/
+        /* Change 6: Adding the clean up and continue functions.*/
         // clear the stage
         jQuery('display_stage').remove();
         jQuery('display_stage_background').remove();
@@ -502,7 +502,7 @@ jsPsych.init({
 });
 ```
 
-### Change 6: Add the clean up and continue functions
+### Change 6: Adding the clean up and continue functions
 
 When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. Then, execulte the `clickNextButton` to simulate clicking the Next button and proceed to the next question.
 
@@ -581,14 +581,8 @@ Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.
 
 ## Do you also want to save the trial-by-trial data?
 
-### First, prepare unique participant IDs in Qualtrics.
+I describe two ways for saving the experiment files in these tutorials. 
 
-If you are not doing this already. Please refer to the below resources.
+1. [Saving data to a web server using PHP](save-php.md)
+2. [Saving data to your Dropbox folder](save-dropbox.md)
 
-* [Qualtrics.com: Assigning Randomized IDs to Respondents](https://www.qualtrics.com/support/survey-platform/common-use-cases-rc/assigning-randomized-ids-to-respondents/)
-* [Brown.edu: Use Qualtrics for Human Subject Research: Using Pre-Generated Participant IDs](https://ithelp.brown.edu/kb/articles/use-qualtrics-for-human-subject-research-using-pre-generated-participant-ids)
-* [Cloudresearch.com: WorkerID (And All MTurk Fields) Sent to Qualtrics](https://www.cloudresearch.com/resources/blog/workerid-and-all-mturk-fields-sent-to-qualtrics/)
-
-### Second, add the necessary variables/functions for saving
-
-Please refer to the [Saving Data with PHP tutorial](save-php.md).

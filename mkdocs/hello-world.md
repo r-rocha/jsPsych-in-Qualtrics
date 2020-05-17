@@ -215,7 +215,7 @@ The `qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsP
 
 Let's look at each change.
 
-### Change 1: Hide the Next button
+### Change 1: Hiding the Next button
 
 The below javascript code hides the Next button and puts the javascript code in the driving seat.
 
@@ -227,7 +227,7 @@ var qthis = this;
 qthis.hideNextButton();
 ```
 
-### Change 2: Define and load required resources
+### Change 2: Defining and load required resources
 
 The below javascript defines where the necessary files are so that Qualtrics can load these.
 
@@ -259,7 +259,7 @@ if (window.Qualtrics && (!window.frameElement || window.frameElement.id !== "mob
 }
 ```
 
-### Change 3: Append the display_stage Div using jQuery
+### Change 3: Appending the display_stage Div using jQuery
 
 In Qualtrics, jQuery (loaded by default) is used to append the `display_stage_background` and `display_stage` Divs. The CSS for these elements will be added directly to Question HTML later in this tutorial.
 
@@ -269,7 +269,7 @@ jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
 jQuery("<div id = 'display_stage'></div>").appendTo('body');
 ```
 
-### Change 4: Wrap jsPsych.init() in a function
+### Change 4: Wrapping jsPsych.init() in a function
 
 The main experiment codes are wrapped in the `initExp` function to make sure it runs after all the necessary library and plugin files are loaded (as defined in the `loadScript` function above).
 
@@ -288,7 +288,7 @@ function initExp() {
 }
 ```
 
-### Change 5: Add the clean up and continue functions
+### Change 5: Adding the clean up and continue functions
 
 When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. Then, execulte the `clickNextButton` to simulate clicking the Next button and proceed to the next question.
 
@@ -312,14 +312,14 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     /*Place your JavaScript here to run when the page loads*/
 
-    /* Change 2: Hide the Next button */
+    /* Change 2: Hiding the Next button */
     // Retrieve Qualtrics object and save in qthis
     var qthis = this;
 
     // Hide buttons
     qthis.hideNextButton();
 
-    /* Change 3: Define and load required resources */
+    /* Change 3: Defining and load required resources */
     var jslib_url = "https://kywch.github.io/jsPsych/";
 
     // the below urls must be accessible with your browser
@@ -344,13 +344,13 @@ Qualtrics.SurveyEngine.addOnload(function () {
         loadScript(0);
     }
 
-    /* Change 4: Append the display_stage Div using jQuery */
+    /* Change 4: Appending the display_stage Div using jQuery */
     // jQuery is loaded in Qualtrics by default
     jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
     jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
 
-    /* Change 5: Wrap jsPsych.init() in a function */
+    /* Change 5: Wrapping jsPsych.init() in a function */
     function initExp() {
 
         var hello_trial = {
@@ -362,7 +362,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
             timeline: [hello_trial],
             display_element: 'display_stage',
 
-            /* Change 6: Add the clean up and continue functions.*/
+            /* Change 6: Adding the clean up and continue functions.*/
             on_finish: function (data) {
                 // clear the stage
                 jQuery('display_stage').remove();
@@ -421,3 +421,10 @@ Then, copy paste the portion of `experiment-with-display-element.html` to the HT
 ### Step 4. Publish and test!
 
 Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-publishing-versions/#PublishingNew). Then, an anonymous Qualtrics link is generated. If you click this link, you should be able to see "Hello World!" in Qualtrics. For example, here is [a just another Hello-World Qualtrics survey](https://ssd.az1.qualtrics.com/jfe/form/SV_ehvC3v9MYG83YMJ).
+
+## Do you want to save the trial-by-trial results?
+
+I describe two ways for saving the experiment files in these tutorials. 
+
+1. [Saving data to a web server using PHP](save-php.md)
+2. [Saving data to your Dropbox folder](save-dropbox.md)

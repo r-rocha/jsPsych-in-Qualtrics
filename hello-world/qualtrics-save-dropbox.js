@@ -9,12 +9,13 @@ Qualtrics.SurveyEngine.addOnload(function () {
     // Hide buttons
     qthis.hideNextButton();
 
-    /* Change 2: Defining and load required resources */
+    /* Change 2: Defining and loading required resources */
     var jslib_url = "https://kywch.github.io/jsPsych/";
 
     // the below urls must be accessible with your browser
     // for example, https://kywch.github.io/jsPsych/jspsych.js
     var requiredResources = [
+        'https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.30/Dropbox-sdk.min.js', // Change 6: Loading the Dropbox API
         jslib_url + "jspsych.js",
         jslib_url + "plugins/jspsych-html-keyboard-response.js"
     ];
@@ -39,45 +40,62 @@ Qualtrics.SurveyEngine.addOnload(function () {
     jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
     jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
-    /* Change 6: Defining necessary variables and functions for saving the results */
+    /* Change 7: Adding necessary variables and functions for saving the results */
     // experimental session-defining variables
     var task_name = "hello-world";
     var sbj_id = "${e://Field/workerId}";
 
-    // you must put your save_data php url here.
-    var save_url = "https://users.rcc.uchicago.edu/~kywch/exp_data/save_data.php";
-    var data_dir = task_name;
+    // YOU MUST GET YOUR OWN DROPBOX ACCESS TOKEN
+    var dropbox_access_token = '<PUT YOUR Dropbox ACCESS TOKEN HERE>';
 
     // my preference is to include the task and sbj_id in the file name
-    var file_name = task_name + '_' + sbj_id; 
+    var save_filename = '/' + task_name + '/' + task_name + '_' + sbj_id;
 
     function save_data_json() {
-        jQuery.ajax({
-            type: 'post',
-            cache: false,
-            url: save_url,
-            data: {
-                data_dir: data_dir,
-                file_name: file_name + '.json', // the file type should be added
-                exp_data: jsPsych.data.get().json()
-            }
-        });
+        try {
+            var dbx = new Dropbox.Dropbox({
+                accessToken: dropbox_access_token
+            });
+            dbx.filesUpload({
+                    path: save_filename + '.json',
+                    mode: 'overwrite',
+                    mute: true,
+                    contents: jsPsych.data.get().json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        } catch (err) {
+            console.log("Save data function failed.", err);
+        }
     }
 
     function save_data_csv() {
-        jQuery.ajax({
-            type: 'post',
-            cache: false,
-            url: save_url,
-            data: {
-                data_dir: data_dir,
-                file_name: file_name + '.csv', // the file type should be added
-                exp_data: jsPsych.data.get().csv()
-            }
-        });
+        try {
+            var dbx = new Dropbox.Dropbox({
+                accessToken: dropbox_access_token
+            });
+            dbx.filesUpload({
+                    path: save_filename + '.csv',
+                    mode: 'overwrite',
+                    mute: true,
+                    contents: jsPsych.data.get().csv()
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        } catch (err) {
+            console.log("Save data function failed.", err);
+        }        
     }
 
-    /* Change 4: Wrapping jsPsych.init() in a function */
+    /* Change 4: Wraping jsPsych.init() in a function */
     function initExp() {
 
         var hello_trial = {
@@ -92,7 +110,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
             /* Change 5: Adding the clean up and continue functions.*/
             on_finish: function (data) {
 
-                /* Change 7: Calling the save function -- CHOOSE ONE! */
+                /* Change 8: Calling the save function -- CHOOSE ONE! */
                 // include the participant ID in the data
                 // this must be done before saving
                 jsPsych.data.get().addToLast({participant: sbj_id});

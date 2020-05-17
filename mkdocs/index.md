@@ -11,16 +11,19 @@ If you are looking for Qualtrics tutorials, there are other excellent tutorials 
 
 If you are looking for jsPsych tutorial, the best place to start is [the jsPsych Hello World! tutorial](https://www.jspsych.org/tutorials/hello-world/). You should also look at [the YouTube tutorial from Josh de Leeuw](https://www.youtube.com/playlist?list=PLnfo1lBY1P2Mf_o6rV5wiqqn92Mw3UTGh).
 
-## jsPsych in Qualtrics Tutorial Series
+<h2>jsPsych in Qualtrics Tutorial Series</h2>
+
+**Part 1. The Basics: Launching an online study and saving the data**
 
 * [Making jsPsych files loadable in Qualtrics](github-pages.md)
 * [The famous Hello World! example](hello-world.md)
 * [Saving jsPsych data to a server using PHP](save-php.md)
+* [Saving jsPsych data to your Dropbox](save-dropbox.md)
+
+**Part 2. Case studies: Embedding existing jsPsych experiments into my Qualtrics**
+
 * [Reaction Time Task (from the jsPsych tutorial)](rt-task.md)
 * [Flanker Task (from the jsPsych demo)](flanker.md)
-
----
-
 * N-Back Task (forthcoming)
 * Backward Digit Span Task (forthcoming)
 * Dichotic Listening Task (forthcoming)
