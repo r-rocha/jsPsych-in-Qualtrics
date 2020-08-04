@@ -95,6 +95,7 @@
     function save_data_csv() {
         try {
             var dbx = new Dropbox.Dropbox({
+                fetch: fetch,
                 accessToken: dropbox_access_token
             });
             dbx.filesUpload({
