@@ -1,7 +1,7 @@
 # Saving jsPsych data to your Dropbox folder
 
 Did you know Dropbox can also act like a server for saving your files? 
-So you can still save each participant's data as a CSV or JSON file **without access to a web server!**
+You can save each participant's data file **without access to a web server!**
 
 ---
 
@@ -80,6 +80,7 @@ You can use either the JSON or CSV format, whichever convenient for you. The sav
 function save_data_json() {
     try {
         var dbx = new Dropbox.Dropbox({
+            fetch: fetch,
             accessToken: dropbox_access_token
         });
         dbx.filesUpload({
@@ -295,9 +296,9 @@ In Qualtrics, you can keep or assign the participant ID using [Embedded Data ele
 
 The below steps will create the Embedded Data called `workerId`, which will hold the Participant ID. The value of `workerId` can be set from the Qualtrics survey URL (for details, see [Qualtrics.com: Setting values from the Survey URL](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#SettingValuesFromTheSurveyURL) and [Qualtrics.com: Passing information through query string](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/passing-information-through-query-strings/)). However, if `workerId` is not set, then Qualtrics will automatically generate a random Participant ID, ranging from PID10000 - PID99999, and use this ID to save data.
 
-I set the name of participant ID variable to be `workerId` because I have been using [Cloudresearch/TurkPrime](https://www.cloudresearch.com/) with Amazon MTurk, 
+Setting the name of participant ID variable depends on how you recruit your participants (see the [Recruiting Participants](participants.md) section). I set its name to be `workerId` because I have been using [Cloudresearch/TurkPrime](https://www.cloudresearch.com/) with Amazon MTurk, 
 and [Cloudresearch uses `workerId` to automatically add Mturk Worker ID](https://www.cloudresearch.com/resources/blog/workerid-and-all-mturk-fields-sent-to-qualtrics/). 
-However, other services suggest different field name -- for example, [Prolific suggests `PROLIFIC_PID`](https://researcher-help.prolific.co/hc/en-gb/articles/360009220993-Recording-participants-Prolific-IDs-in-your-study-survey) -- so how you name it is totally up to you.
+However, other services suggest different field name -- for example, [Prolific suggests `PROLIFIC_PID`](https://researcher-help.prolific.co/hc/en-gb/articles/360009220993-Recording-participants-Prolific-IDs-in-your-study-survey) -- so please follow the Qualtrics integration guide from the participant recruiting service you are using.
 
 1. Click **Survey Flow** from the Survey tab
 2. Click **Add a New Element Here**

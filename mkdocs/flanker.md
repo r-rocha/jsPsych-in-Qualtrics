@@ -534,7 +534,50 @@ To open the HTML editor, click the `HTML View` button.
 
 ![Open the Question HTML editor](img/hello-world-qualtrics-Step3_open_question_html_editor.jpg)
 
-Then, copy paste the portion of `demo-flanker-transformed-with-display-element.html` to the HTML editor, starting from `<!-- COPY PASTE TO QUALTRICS FROM HERE -->` to `<!-- COPY PASTE TO QUALTRICS UP TO HERE -->`. After copy pasting, you should see something like below.
+Then, copy paste the portion of `demo-flanker-transformed-with-display-element.html` to the HTML editor, starting from `<!-- COPY PASTE TO QUALTRICS FROM HERE -->` to `<!-- COPY PASTE TO QUALTRICS UP TO HERE -->`. 
+
+```html
+<!-- Change 3: Adding extra scripts for Qualtrics -->
+<!-- COPY PASTE TO QUALTRICS FROM HERE -->
+<link href="https://cdn.jsdelivr.net/gh/kywch/jsPsych-in-Qualtrics/flanker/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+<div>
+<span style="font-size: 24px;">
+    <br><br>
+    If you are seeing this message for <span style="color: rgb(255, 0, 0);"><b>more than 5
+        minutes</b></span>,<br>
+    please screen-capture this screen and send the image to us.
+    <br><br>
+    <span style="font-size: 28px;">We are very sorry for the inconvenience.</span>
+</span>
+</div>
+
+<!-- Change 2: Adding `display_stage` CSS and Div -->
+<style>
+#display_stage_background {
+    width: 100vw;
+    background-color: white;
+    z-index: -1;
+}
+
+#display_stage {
+    position: fixed;
+    left: 1vw;
+    top: 1vh;
+    height: 98vh;
+    width: 98vw;
+    background-color: white;
+    box-shadow: 1px 1px 1px #999;
+    border-radius: 15px;
+    z-index: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+</style>
+<!-- COPY PASTE TO QUALTRICS UP TO HERE -->
+```
+
+After copy pasting, you should see something like below.
 
 ![After copy-paste](img/hello-world-qualtrics-Step3_after_copy_paste.jpg)
 

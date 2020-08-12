@@ -1,4 +1,4 @@
-site_name: jsPsych in Qualtrics
+site_name: jsPsych in Qualtrics Tutorial Series
 theme: readthedocs
 site_url: 'https://kywch.github.io/jsPsych-in-Qualtrics/'
 repo_url: 'https://github.com/kywch/jsPsych-in-Qualtrics/'
@@ -12,10 +12,12 @@ nav:
   - Embedding Hello World!: 'hello-world.md'
   - Saving Data with PHP: 'save-php.md'
   - Saving Data to your Dropbox: 'save-dropbox.md'
+  - Recruiting Participants: 'participants.md'
 - Part 2. Case studies:
   - Embedding Reaction-Time Task: 'rt-task.md'
   - Embedding Flanker Task: 'flanker.md'
-site_author: 'Kyoung Whan Choe'
+  - Embedding Stop Signal Task (STOP-IT): 'stop-it.md'
+#site_author: 'Kyoung Whan Choe'
 site_description: 'Step-by-step tutorials and examples on adding jsPsych cognitive tasks to Qualtrics'
 copyright: 'Copyright &copy; 2020 <a href="https://kywch.github.io/" target="_blank">Kyoung Whan Choe</a>. '
 google_analytics:
