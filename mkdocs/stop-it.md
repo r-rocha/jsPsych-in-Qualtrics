@@ -1,8 +1,10 @@
 # Embedding the STOP-IT Stop Signal Task into Qualtrics
 
-Let's embed [the Stop Signal Task by Verbruggen et al., 2019](https://github.com/fredvbrug/STOP-IT), `the jsPsych_version` into Qualtrics. This version of the Stop Signal Task needs to save the trial-by-trial data for analysis, so I will save the data file to Dropbox. Verbruggen et al. (2019) also provided [the analysis script](https://github.com/fredvbrug/STOP-IT/blob/master/jsPsych_version/README-ANALYZE-IT-JS.md), so please have a look.
+Let's embed [the Stop Signal Task by Verbruggen et al., 2019](https://github.com/fredvbrug/STOP-IT), `the jsPsych_version` into Qualtrics. You can first try the task by clicking [HERE](https://kywch.github.io/STOP-IT/jsPsych_version/experiment-transformed-first.html).
 
 I adapted the original scripts to make the task work in Qualtrics and put these into [my STOP-IT repository](https://github.com/kywch/STOP-IT/). So, it'd be easier for you to fork [my STOP-IT repository](https://github.com/kywch/STOP-IT/) and start from there.
+
+This version of the Stop Signal Task needs to save the trial-by-trial data for analysis, so I will save the data file to Dropbox. Verbruggen et al. (2019) also provided [the analysis script](https://github.com/fredvbrug/STOP-IT/blob/master/jsPsych_version/README-ANALYZE-IT-JS.md), so please have a look.
 
 This tutorial consists of two parts. (1) I will first explain how you can [embed the Stop Signal Task in Qualtrics](stop-it.md#embedding-the-stop-signal-task). (2) I will then [explain the changes I made to the original experiment code](stop-it.md#explaining-the-code-changes). 
 
@@ -533,7 +535,7 @@ function initExp() {
 
 #### Change 6: Adding the clean up and continue functions
 
-When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. Then, execulte the `clickNextButton` to simulate clicking the Next button and proceed to the next question.
+When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. Then, the script executes the `clickNextButton` to simulate clicking the Next button and proceed to the next question.
 
 ```js
     on_finish: function () {

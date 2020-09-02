@@ -17,6 +17,8 @@ nav:
   - Embedding Reaction-Time Task: 'rt-task.md'
   - Embedding Flanker Task: 'flanker.md'
   - Embedding Stop Signal Task (STOP-IT): 'stop-it.md'
+  - Embedding Quick Audio Test: 'audio-test.md'
+  - Embedding Mood Induction: 'mood-induction.md'
 #site_author: 'Kyoung Whan Choe'
 site_description: 'Step-by-step tutorials and examples on adding jsPsych cognitive tasks to Qualtrics'
 copyright: 'Copyright &copy; 2020 <a href="https://kywch.github.io/" target="_blank">Kyoung Whan Choe</a>. '

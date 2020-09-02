@@ -1,6 +1,8 @@
 # Embedding the jsPsych Simple Reaction Time Task into Qualtrics
 
-Let's start from [the original jsPsych Simple Reaction Time Task](https://www.jspsych.org/tutorials/rt-task/) and embed it to qualtrics. 
+Let's start from [the original jsPsych Simple Reaction Time Task](https://www.jspsych.org/tutorials/rt-task/) and embed it to qualtrics.
+
+You can first try the task by clicking [HERE](https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task.html).
 
 ---
 

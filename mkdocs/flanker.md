@@ -1,6 +1,7 @@
 # Embedding the jsPsych Flanker Task into Qualtrics
 
-Let's start from the `demo-flanker.html` in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html) and embed it to qualtrics. 
+Let's start from the `demo-flanker.html` in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html) and embed it to qualtrics. You can first try the task by clicking [HERE](https://kywch.github.io/jsPsych/examples/demo-flanker.html).
+
 For details of `demo-flanker.html`, please read [the separate tutorial in this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/tree/master/flanker).
 
 ---
