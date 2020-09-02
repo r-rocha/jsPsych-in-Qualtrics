@@ -36,6 +36,8 @@ If you have suggestions, please shoot me an email to  `choe_DOT_kyoung_AT_gmail_
 * [Reaction Time Task (from the jsPsych tutorial)](rt-task.md)
 * [Flanker Task (from the jsPsych demo)](flanker.md)
 * [Stop Signal Task (STOP-IT; Verbruggen et al., 2019)](stop-it.md)
+* [Quick Audio Test (recommeded before any auditory study)](audio-test.md)
+* [Mood Induction (Mayer et al. 1995; Marzillier & Davey 2005)](mood-induction.md)
 * N-Back Task (forthcoming)
 * Backward Digit Span Task (forthcoming)
 * Dichotic Listening Task (forthcoming)
