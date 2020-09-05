@@ -295,8 +295,8 @@ When the jsPsych ends, `display_stage` and `display_stage_background` should be 
 ```js
 on_finish: function (data) {
     // clear the stage
-    jQuery('display_stage').remove();
-    jQuery('display_stage_background').remove();
+    jQuery('#display_stage').remove();
+    jQuery('#display_stage_background').remove();
 
     // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
     qthis.clickNextButton();
@@ -365,8 +365,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
             /* Change 6: Adding the clean up and continue functions.*/
             on_finish: function (data) {
                 // clear the stage
-                jQuery('display_stage').remove();
-                jQuery('display_stage_background').remove();
+                jQuery('#display_stage').remove();
+                jQuery('#display_stage_background').remove();
 
                 // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
                 qthis.clickNextButton();

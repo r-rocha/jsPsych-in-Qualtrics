@@ -495,8 +495,8 @@ After saving, the script executes the `clickNextButton` to simulate clicking the
         }
     
         // clear the stage
-        jQuery('display_stage').remove();
-        jQuery('display_stage_background').remove();
+        jQuery('#display_stage').remove();
+        jQuery('#display_stage_background').remove();
 
         // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
         qthis.clickNextButton();
