@@ -3,6 +3,8 @@
 Did you know Dropbox can also act like a server for saving your files? 
 You can save each participant's data file **without access to a web server!**
 
+**<font color=red>WARNING</font>: Dropbox will retire the creation of long-lived access tokens on <font color=red>September 30th, 2021</font>. After that, this tutorial <font color=red>WILL NOT</font> work. So, please plan your experiments accordingly.** See [the Dropbox announcement](https://dropbox.tech/developers/migrating-app-permissions-and-access-tokens).
+
 ---
 
 ## Step 0. Get a Dropbox account
@@ -15,31 +17,45 @@ Go to [the Dropbox site](https://db.tt/2ppjkYTQ) and create a free account.
 
 Go to [the Dropbox App console](https://www.dropbox.com/developers/apps/create) and sign in, if necessary.
 
-Once you see a screen like below, (1) select `Dropbox API`, (2) select `App folder`, and (3) name your app. 
+Once you see a screen like below, (1) select `Scoped access`, (2) select `App folder`, and (3) name your app. 
 I named my app `SaveMyExperimentData`. When you are done, click `Create app`.
 
 ![Create a Dropbox app](img/save-dropbox-Step1_app_console.jpg)
 
 ---
 
-## Step 2. Get the Dropbox access token
+## Step 2. Give the necessary permisions for uploading files
 
-If your app is created successfully, you will see a screen like below. 
-Scroll down to find `Generate access token` and click the button to get the token.
+If your app is created successfully, you will see the tabs: `Settings`, `Permissions`, `Branding`, and `Analytics`. 
 
-![Get the access token](img/save-dropbox-Step2_access_token.jpg)
+Click the **`Permissions`** tab. 
+
+Go to `Files and folders` section and check the `files.metadata.write`, `files.content.write`, `files.content.read` boxes like below to allow file uploads.
+
+![Give file write permissions](img/save-dropbox-Step2_give_permissions.jpg)
+
+---
+
+## Step 3. Get the Dropbox access token
+
+Then click the `Settings` tab, and you will see a screen like below.
+
+1. Scroll down to find `Access token expiration` and set it to **No expiration**. If you don't change the expiration, this key will expire in 4 hours, and expiration, your experiment **CANNOT** upload files to Dropbox.
+2. Then, go to `Generate access token` and click the button to get the token. If you generate the key first, then you may have to repeat the whole step because permissions and expiration cannot be changed after the token has been generated.
+
+![Get the access token](img/save-dropbox-Step3_access_token.jpg)
 
 **<font color=red>WARNING:</font> Do NOT share this access token with anyone, 
 including sharing your code, etc.
 <font color=red>With this code, anyone can access or delete your Dropbox files and abuse your Dropbox account.</font>.**
 So I suggest you two things when you finish your data collection. 
 
-1. **Invalidate the access code** by deleting the app (see the [Step 6](save-dropbox.md#step-6-unlink-your-dropbox-app) below). When you delete your app, saved files in your folder remains intact. 
+1. **Invalidate the access code** by deleting the app (see the [Step 8](save-dropbox.md#step-8-unlink-your-dropbox-app) below). When you delete your app, saved files in your folder remains intact. 
 2. **Replace the access code with blank** in your source code, as I did in this tutorial, so that you do not accidentally publish your access code. 
 
 ---
 
-## Step 3. Add the save function to the experiment HTML script
+## Step 4. Add the save function to the experiment HTML script
 
 The Dropbox side work is done. Now, you need to add scripts to send the result file when an experiment session is done.
 
@@ -287,7 +303,7 @@ So the `experiment-with-display-element-save-dropbox.html` code looks like this.
 ```
 ---
 
-## Step 4. Add Participand ID to Qualtrics
+## Step 5. Add Participand ID to Qualtrics
 
 Let's log in to Qualtrics. The basics of embedding jsPsych experiment into Qualtrics is explained in the [Embedding Hello World!](hello-world.md#finally-embedding-jspsych-in-qualtrics) page. 
 
@@ -323,7 +339,7 @@ After these steps, you should see a screen like below.
 
 ---
 
-## Step 5. Use the save function from Qualtrics
+## Step 6. Use the save function from Qualtrics
 
 The `qualtrics-save-dropbox.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics-save-php.js) contains additional changes from `qualtrics.js` and `experiment-with-display-element-save-dropbox.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
@@ -589,7 +605,7 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 
 ---
 
-## Step 6. Download the data? You already have them!
+## Step 7. Download the data? You already have them!
 
 When an experimental session finishes, its file will instantly delivered to your Dropbox folder. 
 
@@ -597,7 +613,7 @@ Isn't it nice?
 
 ---
 
-## Step 7. Unlink your Dropbox app
+## Step 8. Unlink your Dropbox app
 
 As I mentioned in the [Step 2](#step-2-get-the-dropbox-access-token), 
 the Dropbox access token you have is dangerous because anyone with the code can
