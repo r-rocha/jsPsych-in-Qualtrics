@@ -125,7 +125,7 @@ After copy pasting, you should see something like below.
 
 #### Step 4. Create Embedded Data elements
 
-To store the addition details about this audio test, you need to create the Embedded Data elements named **audio_test_rt** and **audio_test_order** in your survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#CreatingAnEmbeddedDataElement). 
+To store the additional details about this audio test, you need to create the Embedded Data elements named **audio_test_rt** and **audio_test_order** in your survey by following [this Qualtrics tutorial](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/#CreatingAnEmbeddedDataElement). 
 
 1. Click **Survey Flow** from the Survey tab
 2. Click **Add a New Element Here**

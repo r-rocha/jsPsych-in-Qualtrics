@@ -10,7 +10,7 @@ This tutorial consists of two parts. (1) I will first explain how you can [embed
 
 ## Embedding RC-RAGE into Qualtrics
 
-### Hosting the Mood Induction scripts in GitHub
+### Hosting the RC-RAGE scripts in GitHub
 
 To use jsPsych in Qualtrics, the jsPsych javascript and CSS files need to be online and loadable from Qualtrics. Creating a GitHub repository for your experiment helps you do so in simple steps.
 
@@ -43,7 +43,7 @@ To continue, please create a new Qualtrics project. Then, create a new question 
 
 ---
 
-#### Step 2. Open the Question JavaScript editor and copy paste the whole `mood-induction-qualtrics.js`
+#### Step 2. Open the Question JavaScript editor and copy paste the whole `rc-rage-qualtrics.js`
 
 Keep going in the above picture. (2) Click the gear to open the dropdown menu, and then (3) find and click **Add JavaScript**. 
 

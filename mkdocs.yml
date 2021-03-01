@@ -16,6 +16,7 @@ nav:
 - Part 2. Case studies:
   - Embedding Reaction-Time Task: 'rt-task.md'
   - Embedding Flanker Task: 'flanker.md'
+  - Embedding Choose-And-Solve Task: 'choose-and-solve.md'  
   - Embedding Stop Signal Task (STOP-IT): 'stop-it.md'
   - Embedding Quick Audio Test: 'audio-test.md'
   - Embedding Mood Induction: 'mood-induction.md'
