@@ -447,7 +447,7 @@ function initExp() {
 
 This script saves additional data (script order and spent time)) to Qualtrics Embedded Data to simplify the analysis.
 
-The `trial_data` is a csv-like string with space (' ') as the delimiter and semicolor (';') as the newline character. The columns are: trial, steal_timing, finish_code, click_cnt, extra_click, points, rt, time_remain. This string can be turned into the csv format by this python command.
+The `trial_data` is a csv-like string with space (' ') as the delimiter and semicolor (';') as the newline character. The columns are: trial, steal_timing, finish_code, click_cnt, extra_click, points, rt, time_remain. This string can be turned into the csv format by this python command. Please see [this google colab page](https://colab.research.google.com/github/kywch/RC-RAGE_jsPsych/blob/master/read_data.ipynb) for a working example.
 ```python
 # python code
 result_csv = result_string.strip().replace(';', '\n').replace(' ', ',')
