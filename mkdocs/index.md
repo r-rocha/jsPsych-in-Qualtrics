@@ -36,6 +36,7 @@ If you have suggestions, please shoot me an email to  `choe_DOT_kyoung_AT_gmail_
 * [Reaction Time Task (from the jsPsych tutorial)](rt-task.md)
 * [Flanker Task (from the jsPsych demo)](flanker.md)
 * [Choose-And-Solve Task (CAST; Choe et al., 2019)](choose-and-solve.md)
+* [Retaliate or Carry-on: Reactive AGgression Experiment (RC-RAGE; Meidenbauer et al., 2021)](rc-rage.md)
 * [Stop Signal Task (STOP-IT; Verbruggen et al., 2019)](stop-it.md)
 * [Quick Audio Test (recommeded before any auditory study)](audio-test.md)
 * [Mood Induction (Mayer et al. 1995; Marzillier & Davey 2005)](mood-induction.md)

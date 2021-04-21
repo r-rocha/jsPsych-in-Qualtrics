@@ -17,6 +17,7 @@ nav:
   - Embedding Reaction-Time Task: 'rt-task.md'
   - Embedding Flanker Task: 'flanker.md'
   - Embedding Choose-And-Solve Task: 'choose-and-solve.md'  
+  - Embedding RC-RAGE (agression task): 'rc-rage.md'
   - Embedding Stop Signal Task (STOP-IT): 'stop-it.md'
   - Embedding Quick Audio Test: 'audio-test.md'
   - Embedding Mood Induction: 'mood-induction.md'

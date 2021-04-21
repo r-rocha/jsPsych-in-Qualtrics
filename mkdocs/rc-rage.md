@@ -1,6 +1,6 @@
 # Embedding Reactive AGression Task (RC-RAGE) into Qualtrics
 
-An improved costly-reactive-aggression paradigm, called **Retaliate or Carry-on: Reactive AGression Task (RC-RAGE)**, by Meidenbauer, Choe, & Berman (2020) was implemented using jsPsych. You can first try the task by clicking [HERE](https://kywch.github.io/RC-RAGE_jsPsych/rc-rage-demo.html).
+An improved costly-reactive-aggression paradigm, called **Retaliate or Carry-on: Reactive AGression Task (RC-RAGE)**, by [Meidenbauer, Choe, Bakkour, & Berman (2021)](https://psyarxiv.com/kw3by/) was implemented using jsPsych. You can first try the task by clicking [HERE](https://kywch.github.io/RC-RAGE_jsPsych/rc-rage-demo.html).
 
 The RC-RAGE code is freely available at the [RC-RAGE GitHub repository](https://github.com/kywch/RC-RAGE_jsPsych). You can either directly use these files for your study or fork this repository to customize.
 
@@ -443,9 +443,15 @@ function initExp() {
 });
 ```
 
-#### Change 5: Summarizing and saving the results, then finishing the study 
+#### Changes 5-6: Summarizing and saving the results, then finishing the study 
 
 This script saves additional data (script order and spent time)) to Qualtrics Embedded Data to simplify the analysis.
+
+The `trial_data` is a csv-like string with space (' ') as the delimiter and semicolor (';') as the newline character. The columns are: trial, steal_timing, finish_code, click_cnt, extra_click, points, rt, time_remain. This string can be turned into the csv format by this python command.
+```python
+# python code
+result_csv = result_string.strip().replace(';', '\n').replace(' ', ',')
+```
 
 When the jsPsych ends, `display_stage` and `display_stage_background` should be removed. 
 
@@ -494,7 +500,36 @@ on_finish: function () {
     // the simple trial-level data
     // NOTE that detailed trial-level data are not saved here, but it can be done.                
     Qualtrics.SurveyEngine.setEmbeddedData("planned_trial", trial_seq);
-    Qualtrics.SurveyEngine.setEmbeddedData("wasted_click_history", wasted_click_history.toString().replace(/,/g, ';'));                                
+    Qualtrics.SurveyEngine.setEmbeddedData("wasted_click_history", wasted_click_history.toString().replace(/,/g, ';'));
+
+    /* Change 6: Saving the trial-level data and finishing up */
+    // save the data
+    Qualtrics.SurveyEngine.setEmbeddedData("trial_data", result_string);
+
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    sleep(500).then(() => {
+        saved_string = Qualtrics.SurveyEngine.getEmbeddedData("trial_data");
+        //console.log(saved_string);
+        if (result_string !== saved_string) {
+            console.log('There was a problem with saving data. Trying again...')
+            // try to save it once more, but no guarantee
+            Qualtrics.SurveyEngine.setEmbeddedData("trial_data", result_string);
+        } else {
+            console.log('Save was successful.')
+        }
+    });
+
+    sleep(500).then(() => {
+        // clear the stage
+        jQuery('#display_stage').remove();
+        jQuery('#display_stage_background').remove();
+
+        // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
+        qthis.clickNextButton();
+    });                                    
 
     // clear the stage
     jQuery('#display_stage').remove();
