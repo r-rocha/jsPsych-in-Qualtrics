@@ -1,6 +1,6 @@
 # Embedding Reactive AGression Task (RC-RAGE) into Qualtrics
 
-An improved costly-reactive-aggression paradigm, called **Retaliate or Carry-on: Reactive AGression Task (RC-RAGE)**, by [Meidenbauer, Choe, Bakkour, & Berman (2021)](https://psyarxiv.com/kw3by/) was implemented using jsPsych. You can first try the task by clicking [HERE](https://kywch.github.io/RC-RAGE_jsPsych/rc-rage-demo.html).
+An improved costly-reactive-aggression paradigm, called **Retaliate or Carry-on: Reactive AGression Experiment (RC-RAGE)**, by [Meidenbauer, Choe, Bakkour, & Berman (2021)](https://psyarxiv.com/kw3by/) was implemented using jsPsych. You can first try the task by clicking [HERE](https://kywch.github.io/RC-RAGE_jsPsych/rc-rage-demo.html).
 
 The RC-RAGE code is freely available at the [RC-RAGE GitHub repository](https://github.com/kywch/RC-RAGE_jsPsych). You can either directly use these files for your study or fork this repository to customize.
 
