@@ -125,7 +125,8 @@ To store the addition details about this audio test, you need to create the Embe
 8. Click **Add a New Field** and type **kill_cnt**
 9. Click **Add a New Field** and type **planned_trial**
 10. Click **Add a New Field** and type **wasted_click_history**
-11. Click **Move** of the new blocks you created (`Set Embedded Data` and `Then Branch If`) and move these blocks the top of Survey Flow
+11. Click **Add a New Field** and type **trial_data**
+12. Click **Move** of the new blocks you created (`Set Embedded Data` and `Then Branch If`) and move these blocks the top of Survey Flow
 
 ---
 
@@ -531,12 +532,6 @@ on_finish: function () {
         qthis.clickNextButton();
     });                                    
 
-    // clear the stage
-    jQuery('#display_stage').remove();
-    jQuery('#display_stage_background').remove();
-
-    // simulate click on Qualtrics "next" button, making use of the Qualtrics JS API
-    qthis.clickNextButton();
 }
 });
 ```
