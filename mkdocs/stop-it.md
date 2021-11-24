@@ -4,7 +4,7 @@ Let's embed [the Stop Signal Task by Verbruggen et al., 2019](https://github.com
 
 I adapted the original scripts to make the task work in Qualtrics and put these into [my STOP-IT repository](https://github.com/kywch/STOP-IT/). So, it'd be easier for you to fork [my STOP-IT repository](https://github.com/kywch/STOP-IT/) and start from there.
 
-This version of the Stop Signal Task needs to save the trial-by-trial data for analysis, so I will save the data file to Dropbox. Verbruggen et al. (2019) also provided [the analysis script](https://github.com/fredvbrug/STOP-IT/blob/master/jsPsych_version/README-ANALYZE-IT-JS.md), so please have a look.
+This version of the Stop Signal Task needs to save the trial-by-trial data for analysis, so I'm saving the data file to a PHP web server, following the [Saving Data with PHP](save-php.md). Verbruggen et al. (2019) also provided [the analysis script](https://github.com/fredvbrug/STOP-IT/blob/master/jsPsych_version/README-ANALYZE-IT-JS.md), so please have a look.
 
 This tutorial consists of two parts. (1) I will first explain how you can [embed the Stop Signal Task in Qualtrics](stop-it.md#embedding-the-stop-signal-task). (2) I will then [explain the changes I made to the original experiment code](stop-it.md#explaining-the-code-changes). 
 
@@ -30,11 +30,9 @@ When you are done, you can check the online files with your browser by directly 
 
 ### Preparing the Dropbox to save your files
 
-To analyze the Stop Signal Task data, you need the trial-by-trial data file. You can save the data file to [using a web server and PHP](save-php.md), but in this tutorial, I save the data file to Dropbox.
+To analyze the Stop Signal Task data, you need the trial-by-trial data file, which you can get these by [using a web server and PHP](save-php.md). Please read it and **prepare a url for save**. Once you have the url, find the line `var save_url = "<PUT YOUR SAVE URL HERE>";` in `experiment-transformed-qualtrics.js` and replace `<PUT YOUR SAVE URL HERE>` with the url.
 
-Please see the tutorial [Saving Data to your Dropbox](save-dropbox.md) and get the **Dropbox access token**. Also, please take a moment to look at the save function and some things to put in Qualtrics, which are already built into `experiment-transformed-qualtrics.js`.
-
-For the save function to work properly, you must put your **Dropbox access token** to the `dropbox_access_token` variable, where I marked with the string `<PUT YOUR Dropbox ACCESS TOKEN HERE>`. Please replace this string with your Dropbox access token.
+**For the save function to work properly, it must start with `https://`.**
 
 ---
 
@@ -44,9 +42,7 @@ Let's log in to Qualtrics and take a look at each step.
 
 #### Step 1. Create a new Qualtrics project and then a new question
 
-This tutorial assumes that readers are much more familiar with Qualtrics. For Qualtrics tutorial, there are other excellent tutorials available like [this Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/).
-
-To continue, please create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
+First, create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
 
 ![Add JavaScript to a Qualtrics question](img/hello-world-qualtrics-Step1_add_javascript_to_question.jpg)
 
@@ -60,7 +56,7 @@ Keep going in the above picture. (2) Click the gear to open the dropdown menu, a
 
 Then copy-paste the whole [`experiment-transformed-qualtrics.js` (click to see the code)](https://raw.githubusercontent.com/kywch/STOP-IT/master/jsPsych_version/experiment-transformed-qualtrics.js) into the editor. 
 
-<font color=red>DO NOT FORGET TO PUT THE DROPBOX ACCESS TOKEN INTO THE CODE.</font>
+<font color=red>YOU MUST PUT THE SAVE URL that begins with https:// INTO THE CODE.</font>
 
 ---
 
@@ -264,64 +260,62 @@ type="text/css">
 
 ---
 
-### Third transformation (save to Dropbox): experiment-transformed-third.html
+### Third transformation (save to PHP): experiment-transformed-third.html
 
 To make [`experiment-transformed-third.html` (click to see the code)](https://github.com/kywch/STOP-IT/blob/master/jsPsych_version/experiment-transformed-third.html) work and save the trial-by-trial data file, you should set up your Dropbox App and get your **Dropbox access token**. To do so, see [the above instructions](stop-it.md#preparing-the-dropbox-to-save-your-files).
 
 The [`experiment-transformed-third.html` (click to see the code)](https://github.com/kywch/STOP-IT/blob/master/jsPsych_version/experiment-transformed-third.html) contains three additional changes from [`experiment-transformed-second.html` (click to see the code)](https://github.com/kywch/STOP-IT/blob/master/jsPsych_version/experiment-transformed-second.html). Let's look at these additional change.
 
-#### Change 4: Defining necessary variables for saving the results
+#### Change 4-5: Defining necessary variables and functions for saving the results
 
-You can set `task_id`, `sbj_id`, and `save_filename` as you like. However, you must provide a correct `dropbox_access_token`.
-
-```js
-/* Change 4: Defining necessary variables for saving the results */
-// experimental session-defining variables
-var task_id = "STOP-IT";
-var sbj_id = "test01";
-
-// YOU MUST GET YOUR OWN DROPBOX ACCESS TOKEN
-var dropbox_access_token = '<PUT YOUR Dropbox ACCESS TOKEN HERE>';
-
-// my preference is to include the task and sbj_id in the file name
-var save_filename = '/' + task_id + '/' + task_id + '_' + sbj_id + '.csv';
-```
-
-#### Change 5. Defining save functions using Dropbox API
-
-You must load the Dropbox API to use it.
-```html
-<!-- Change 5: Defining save functions using Dropbox API -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.30/Dropbox-sdk.min.js"></script>
-```
-
-The below save function is also added.
+You can set `task_id` and/or `data_dir` as you like. However, you must provide a correct `save_url`.
 
 ```js
-/* Change 5: Defining save functions using Dropbox API */
-function save_data(dropbox_access_token, save_filename) {
-console.log("Save data function called.");
-var selected_data = filter_data();
-try {
-    var dbx = new Dropbox.Dropbox({
-    fetch: fetch,
-    accessToken: dropbox_access_token
-    });
-    dbx.filesUpload({
-        path: save_filename,
-        mode: 'overwrite',
-        mute: true,
-        contents: selected_data.csv()
-    })
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.error(error);
-    });
-} catch (err) {
-    console.log("Save data function failed.", err);
+// you must put your save_data php url here.
+// like https://users.rcc.uchicago.edu/~kywch/exp_data/save_data.php
+var save_url = "<PUT YOUR SAVE URL HERE>";
+
+function save_data(data_dir, file_name) {
+    var selected_data = filter_data();
+    console.log("Save data function called.");
+    try {
+        jQuery.ajax({
+            type: 'post',
+            cache: false,
+            url: save_url,
+            data: {
+                data_dir: data_dir,
+                file_name: file_name + '.csv', // the file type should be added
+                exp_data: selected_data.csv()
+            }
+        });
+    } catch (err) {
+        console.log("Save data function failed.", err);
+    }
 }
+```
+
+Also, `sbj_id`, and thus `file_name`, must be unique. Otherwise, you will lose the data. That's why the random number is used when `sbj_id` is empty.
+
+```js
+// experimental session-defining variables
+flag_debug = true;
+task_id = "STOP-IT";
+sbj_id = "${e://Field/workerId}";
+if (!sbj_id.trim()) {
+    sbj_id = Math.random().toString(36).slice(-6);
+    try {
+        Qualtrics.SurveyEngine.setEmbeddedData("workerId", sbj_id);
+    } catch (err) {
+        console.log('Warning: ', err);
+    }
+}
+
+// PHP-based data save function
+// save_data needs data_dir and file_name
+// my preference is to include the task id/name and sbj_id in the file name
+var data_dir = task_id;
+var file_name = task_id + '_' + sbj_id + '.csv';
 ```
 
 #### Change 6: Sending the results file upon completion
@@ -331,10 +325,10 @@ For details, see [the original jsPsych tutorial](https://www.jspsych.org/overvie
 The callback will trigger once all trials in the experiment have been run, so it is a great place to call save functions.
 
 ```js
-    
     /* Change 6: Sending the results file upon completion */
+
     on_finish: function () {
-      save_data(dropbox_access_token, save_filename);
+        save_data(data_dir, file_name);
     },
 
 ```
@@ -462,26 +456,24 @@ function filter_data() {
     return selected_data;
 }
 
-function save_data(dropbox_access_token, save_filename) {
-    console.log("Save data function called.");
+// you must put your save_data php url here.
+// like https://users.rcc.uchicago.edu/~kywch/exp_data/save_data.php
+var save_url = "<PUT YOUR SAVE URL HERE>";
+
+function save_data(data_dir, file_name) {
     var selected_data = filter_data();
+    console.log("Save data function called.");
     try {
-        var dbx = new Dropbox.Dropbox({
-            fetch: fetch,
-            accessToken: dropbox_access_token
+        jQuery.ajax({
+            type: 'post',
+            cache: false,
+            url: save_url,
+            data: {
+                data_dir: data_dir,
+                file_name: file_name + '.csv', // the file type should be added
+                exp_data: selected_data.csv()
+            }
         });
-        dbx.filesUpload({
-                path: save_filename,
-                mode: 'overwrite',
-                mute: true,
-                contents: selected_data.csv()
-            })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
     } catch (err) {
         console.log("Save data function failed.", err);
     }
@@ -511,12 +503,12 @@ function initExp() {
         }
     }
 
+    // PHP-based data save function
+    // save_data needs data_dir and file_name
     // my preference is to include the task id/name and sbj_id in the file name
-    var save_filename = '/' + task_id + '/' + task_id + '_' + sbj_id + '.csv';
-
-    // YOU MUST GET YOUR OWN DROPBOX ACCESS TOKEN to save the file
-    var dropbox_access_token = '<PUT YOUR Dropbox ACCESS TOKEN HERE>';
-
+    var data_dir = task_id;
+    var file_name = task_id + '_' + sbj_id + '.csv';
+    
     // push all the procedures, which are defined in stop-it_main.js to the overall timeline
     var timeline = []; // this array stores the events we want to run in the experiment
     timeline.push(start_procedure, block_procedure, end_procedure);
@@ -539,7 +531,7 @@ When the jsPsych ends, `display_stage` and `display_stage_background` should be 
 
 ```js
     on_finish: function () {
-        save_data(dropbox_access_token, save_filename);
+        save_data(data_dir, file_name);
 
         /* Change 6: Adding the clean up and continue functions.*/
         // clear the stage

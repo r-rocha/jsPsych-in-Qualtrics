@@ -12,7 +12,6 @@ If you are not familiar with web servers and PHP, please please ask your IT prof
 **They almost always can HELP you!** Also look for resources like below. 
 
 * [UNL.edu: Prerequisites for hosting web content on your account/setting up your first PHP page](https://cse.unl.edu/faq-section/web-related)
-* [NJIT.edu: Step by step instructions for beginners for creating a basic Web Page](https://ist.njit.edu/sites/ist.njit.edu/files/createwebpage_0.pdf)
 
 ---
 
@@ -214,7 +213,7 @@ function save_data_csv() {
 ### Change 6: Sending the results file upon completion
 
 The `on_finish` callback can be declared in the `jsPsych.init` method. 
-For details, see [the original jsPsych tutorial](https://www.jspsych.org/overview/callbacks/#on_finish-experiment).
+For details, see [the original jsPsych v6.3 tutorial](https://www.jspsych.org/6.3/overview/callbacks/#on_finish-experiment).
 The callback will trigger once all trials in the experiment have been run, so it is a great place to call save functions.
 
 **NOTE: Here, both `save_data_json()` and `save_data_csv()` were called to show how these can be used. Choose one.**

@@ -1,6 +1,6 @@
 # Embedding Reactive AGression Task (RC-RAGE) into Qualtrics
 
-An improved costly-reactive-aggression paradigm, called **Retaliate or Carry-on: Reactive AGression Experiment (RC-RAGE)**, by [Meidenbauer, Choe, Bakkour, & Berman (2021)](https://psyarxiv.com/kw3by/) was implemented using jsPsych. You can first try the task by clicking [HERE](https://kywch.github.io/RC-RAGE_jsPsych/rc-rage-demo.html).
+An improved costly-reactive-aggression paradigm, called **Retaliate or Carry-on: Reactive AGression Experiment (RC-RAGE)**, by [Meidenbauer, Choe, Bakkour, Inzlicht & Berman (2021)](https://psyarxiv.com/kw3by/) was implemented using jsPsych. You can first try the task by clicking [HERE](https://kywch.github.io/RC-RAGE_jsPsych/rc-rage-demo.html).
 
 The RC-RAGE code is freely available at the [RC-RAGE GitHub repository](https://github.com/kywch/RC-RAGE_jsPsych). You can either directly use these files for your study or fork this repository to customize.
 
@@ -35,9 +35,7 @@ Let's log in to Qualtrics and take a look at each step.
 
 #### Step 1. Create a new Qualtrics project and then a new question
 
-This tutorial assumes that readers are much more familiar with Qualtrics. For Qualtrics tutorial, there are other excellent tutorials available like [this Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/).
-
-To continue, please create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
+First, create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
 
 ![Add JavaScript to a Qualtrics question](img/hello-world-qualtrics-Step1_add_javascript_to_question.jpg)
 

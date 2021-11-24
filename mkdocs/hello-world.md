@@ -1,14 +1,16 @@
 # Embedding the jsPsych "Hello world" experiment into Qualtrics
 
-Let's start from [the original jsPsych "Hello world!" example](https://www.jspsych.org/tutorials/hello-world/) and embed it to qualtrics. To do so, you need to use the `display_element` option, which was briefly mentioned in [the jsPsych tutorial](https://www.jspsych.org/overview/experiment-options/#controlling-where-jspsych-renders-on-the-page). 
+<font color=red>**WARNING!! This tutorial series is based on version `6.x` of jsPsych. Due to extensive changes in jsPsych 7.x and above, many things in this tutorial may not work with jsPsych v7.x and above. You can get [jsPsych v6.3.1 (the last jsPsych 6.x release) from here](https://github.com/jspsych/jsPsych/releases/download/v6.3.1/jspsych-6.3.1.zip).**</font>
+
+Let's start from [the original jsPsych v6.3 "Hello world!" example](https://www.jspsych.org/6.3/tutorials/hello-world/) and embed it to qualtrics. To do so, you need to use the `display_element` option, which was briefly mentioned in [the jsPsych tutorial](https://www.jspsych.org/overview/experiment-options/#controlling-where-jspsych-renders-on-the-page). 
 
 ---
 
 ## The start: `experiment.html`
 
-After completing [the original jsPsych "Hello world!" example](https://www.jspsych.org/tutorials/hello-world/), your folder should look like this.
+After completing [the original jsPsych v6.3 "Hello world!" example](https://www.jspsych.org/6.3/tutorials/hello-world/), your folder should look like this.
 
-![Hello-world folder](https://www.jspsych.org/img/folder-with-html.png)
+![Hello-world folder](https://www.jspsych.org/6.3/img/folder-with-html.png)
 
 When you open `experiment.html` using your programming-friendly text editor, such as [Atom](https://atom.io) or [VSCode](https://code.visualstudio.com/), you should see the html code like below.
 
@@ -43,7 +45,7 @@ When you open `experiment.html` in a browser, you should see "Hello world!" prin
 
 ## First transformation: `experiment-with-display-element.html`
 
-Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `experiment-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/experiment-with-display-element.html) contains three changes from the `experiment.html`. When you open `experiment-with-display-element.html` in a browser, you should see the same "Hello world!". 
+Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `experiment-with-display-element.html` file in [the tutorial GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/experiment-with-display-element.html) contains three changes from the `experiment.html`. When you open `experiment-with-display-element.html` in a browser, you should see the same "Hello world!". 
 
 Let's look at each change.
 
@@ -211,7 +213,7 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-The `qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics.js) contains several changes from `experiment-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
+The `qualtrics.js` file in [the tutorial GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/hello-world/qualtrics.js) contains several changes from `experiment-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
 Let's look at each change.
 
@@ -394,9 +396,7 @@ Let's log in to Qualtrics and take a look at each step.
 
 ### Step 1. Create a new Qualtrics project and then a new question
 
-This tutorial assumes that readers are much more familiar with Qualtrics. For Qualtrics tutorial, there are other excellent tutorials available like [this Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/).
-
-To continue, please create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
+First, create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
 
 ![Add JavaScript to a Qualtrics question](img/hello-world-qualtrics-Step1_add_javascript_to_question.jpg)
 
@@ -469,7 +469,5 @@ Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.
 
 ## Do you want to save the trial-by-trial results?
 
-I describe two ways for saving the experiment files in these tutorials. 
+Then, you need a server that can receive your data. See the tutorial [Saving data to a web server using PHP](save-php.md).
 
-1. [Saving data to a web server using PHP](save-php.md)
-2. [Saving data to your Dropbox folder](save-dropbox.md)

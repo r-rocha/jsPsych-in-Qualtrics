@@ -4,6 +4,8 @@ To use jsPsych in Qualtrics, the jsPsych javascript and CSS files need to be onl
 
 I will use these GitHub-hosted scripts in the following tutorials, so please complete this step.
 
+<font color=red>**Please NOTE!! This tutorial series is based on version `6.x` of jsPsych. Due to extensive changes in jsPsych 7.x and above, many things in this tutorial may not work with jsPsych v7.x and above. So, I instead use the `6.1.0 version` below, [which I forked previously](https://github.com/kywch/jsPsych).**</font>
+
 ---
 
 ## Step 0. Create a GitHub account
@@ -12,9 +14,9 @@ Go to [the GitHub site](https://github.com/join) and create your account.
 
 ---
 
-## Step 1. Fork the jsPsych repository
+## Step 1. Fork the (old) jsPsych repository (NOTE: I'm NOT using the latest/official version!)
 
-Go to [the jsPsych repository](https://github.com/jspsych/jsPsych) and click the `Fork` button to copy the repo to your account.
+Go to [my previously-forked jsPsych v6.1.0 repository](https://github.com/kywch/jsPsych) and click the `Fork` button to copy the repo to your account.
 
 ![Fork the jsPsych repository](img/github-pages-Step1_Fork_the_jsPsych_repo.jpg)
 

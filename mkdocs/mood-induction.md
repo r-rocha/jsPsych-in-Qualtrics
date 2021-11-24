@@ -4,7 +4,7 @@ The mood induction procedures by Mayer et al. (1995) and Marzillier & Davey (200
 
 Before running an auditory task (like mood induction or dual n-back), you should make sure participants can listen to sound. To do so, I also made a quick audio test using jsPsych. You can first try the test by clicking [HERE](https://kywch.github.io/Mood-Induction_jsPsych/audio-test-demo.html). See the [Embedding Quick Audio Test](audio-test.md) tutorial to use this in Qualtrics.
 
-I put these codes into the [Mood Induction repository](https://github.com/kywch/Mood-Induction_jsPsych). You can either directly use these files or fork this repository to customize.
+I uploaded these codes on the [Mood Induction repository](https://github.com/kywch/Mood-Induction_jsPsych). You can either directly use these files or fork this repository to customize.
 
 This tutorial consists of two parts. (1) I will first explain how you can [embed the mood induction in Qualtrics](mood-induction.md#embedding-the-mood-induction-into-qualtrics). (2) I will then [explain the experiment code](mood-induction.md#explaining-the-code). 
 
@@ -37,9 +37,7 @@ Let's log in to Qualtrics and take a look at each step.
 
 #### Step 1. Create a new Qualtrics project and then a new question
 
-This tutorial assumes that readers are much more familiar with Qualtrics. For Qualtrics tutorial, there are other excellent tutorials available like [this Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/).
-
-To continue, please create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
+First, create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
 
 ![Add JavaScript to a Qualtrics question](img/hello-world-qualtrics-Step1_add_javascript_to_question.jpg)
 

@@ -2,7 +2,7 @@
 
 The best advantage of using Qualtrics is that many participant recruiting services already offer easy tutorials for integrating Qualtrics with their services.
 
-One important thing that you must check is how **participant IDs** are handled, which varies from one service to another. In this tutorial, [Saving Data with PHP](save-php.md#step-6-add-participand-id-to-qualtrics) and [Saving Data wit Dropbox](save-dropbox.md#step-4-add-participand-id-to-qualtrics), the Embedded Data `workerId` is determine the file name of each participant's experiment data. Should you use another name, you should also replace `workerId` with the name you use in the Qualtrics code `var sbj_id = "${e://Field/workerId}";`.
+One important thing that you must check is how **participant IDs** are handled, which varies from one service to another. In this tutorial, [Saving Data with PHP](save-php.md#step-6-add-participand-id-to-qualtrics), the Embedded Data `workerId` is determine the file name of each participant's experiment data. Should you use another name, you should also replace `workerId` with the name you use in the Qualtrics code `var sbj_id = "${e://Field/workerId}";`.
 
 **Before launching your experiment, DOUBLE CHECK if the experiment files are saved with correct participant ID.** The beauty and peril of online experiments is the speed of data collection and thus the speed of spending money.
 

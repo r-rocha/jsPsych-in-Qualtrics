@@ -1,14 +1,14 @@
 # Embedding the jsPsych Simple Reaction Time Task into Qualtrics
 
-Let's start from [the original jsPsych Simple Reaction Time Task](https://www.jspsych.org/tutorials/rt-task/) and embed it to qualtrics.
+<font color=red>**WARNING!! This tutorial series is based on version `6.x` of jsPsych. Due to extensive changes in jsPsych 7.x and above, many things in this tutorial may not work with jsPsych v7.x and above. You can get [jsPsych v6.3.1 (the last jsPsych 6.x release) from here](https://github.com/jspsych/jsPsych/releases/download/v6.3.1/jspsych-6.3.1.zip). Here, I used `v6.1.0`, which is not much different from `v6.3.1`**</font>
 
-You can first try the task by clicking [HERE](https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task.html).
+Let's try to embed a more complicated task, [the original jsPsych v6.3 Simple Reaction Time Task](https://www.jspsych.org/6.3/tutorials/rt-task/), to qualtrics. You can first try the task by clicking [HERE](https://kywch.github.io/Simple-RT-Task/demo-simple-rt-task.html).
 
 ---
 
 ## The start: `demo-simple-rt-task.html`
 
-The experiment code, `demo-simple-rt-task.html` is included in [the examples folder in the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-simple-rt-task.html). Let's make the code work in a separate folder like [the hello-world example](https://www.jspsych.org/tutorials/hello-world/#step-2-create-a-folder-to-store-your-experiment-files).
+The original experiment code, `demo-simple-rt-task.html` is [here](https://github.com/kywch/Simple-RT-Task/blob/master/demo-simple-rt-task.html). Let's make the code work in a separate folder like [the hello-world example](https://www.jspsych.org/tutorials/hello-world/#step-2-create-a-folder-to-store-your-experiment-files).
 
 To do so, you need to change the url of jsPsych scripts, stylesheet, and stimuli of the experiment code. In this tutorial, we will change those twice to make the rt-task (1) run on a new folder and (2) use the GitHub-hosted resources.
 
@@ -21,7 +21,7 @@ First, let's make it run locally. To do so, The jsPsych library, plugins, and st
 <link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css"></link>
 ```
 
-The experiment also needs stimuli images (see [the original jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-3-show-instructions)). So, you need to create a folder called `img` in the experiment folder and copy [blue.png](https://www.jspsych.org/img/blue.png) and [orange.png](https://www.jspsych.org/img/orange.png) into the `img` folder.
+The experiment also needs stimuli images (see [the original jsPsych v6.3 tutorial](https://www.jspsych.org/6.3/tutorials/rt-task/#part-3-show-instructions)). So, you need to create a folder called `img` in the experiment folder and copy [blue.png](https://www.jspsych.org/img/blue.png) and [orange.png](https://www.jspsych.org/img/orange.png) into the `img` folder.
 
 Your folder should look like this.
 
@@ -39,7 +39,7 @@ Go to [the GitHub site](https://github.com/join) and create your account.
 
 ### Step 1. Create a new GitHub repository
 
-Create a repository for your experiment by following [this `Create a repo` guide](https://help.github.com/en/github/getting-started-with-github/create-a-repo).
+First, create a repository for your experiment by following [this `Create a repo` guide](https://help.github.com/en/github/getting-started-with-github/create-a-repo).
 
 ### Step 2. Add experiment files to the repository
 
@@ -241,7 +241,7 @@ var test_stimuli = [{
 
 ### Step 5. `demo-simple-rt-task-transformed.html`: Import `rt-task_main.js`
 
-Cutting the experiment-related code makes the `demo-simple-rt-task-transformed.html` file much shorter. To make `demo-simple-rt-task-transformed.html` work, you need to load `rt-task_main.js` by using a `<script>` tag like the other jspsych plugin files (see [the original jsPsych tutorial](https://www.jspsych.org/tutorials/hello-world/#step-6-use-the-jspsych-html-keyboard-response-plugin-to-print-a-message)).
+Cutting the experiment-related code makes the `demo-simple-rt-task-transformed.html` file much shorter. To make `demo-simple-rt-task-transformed.html` work, you need to load `rt-task_main.js` by using a `<script>` tag like the other jspsych plugin files (see [the original jsPsych v6.3 tutorial](https://www.jspsych.org/6.3/tutorials/hello-world/#step-6-use-the-jspsych-html-keyboard-response-plugin-to-print-a-message)).
 
 ```html
 <!-- CHANGE: Loading the external main experiment script -->
@@ -266,7 +266,7 @@ If the above link works, then it also means that the experiment-related code, `r
 
 ## Second transformation: `demo-simple-rt-task-transformed-with-display-element.html`
 
-Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `demo-simple-rt-task-transformed-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-transformed-with-display-element.html) contains three changes from the `demo-simple-rt-task-transformed.html`. When you open `demo-simple-rt-task-transformed-with-display-element.html` in a browser, you should see the same reaction time task. 
+Adding the `display_element` parameter in the `jsPsych.init()` and having additional control over the display element is important for embedding jsPsych into Qualtrics. The `demo-simple-rt-task-transformed-with-display-element.html` file in [this GitHub repository](https://github.com/kywch/Simple-RT-Task/blob/master/demo-simple-rt-task-transformed-with-display-element.html) contains three changes from the `demo-simple-rt-task-transformed.html`. When you open `demo-simple-rt-task-transformed-with-display-element.html` in a browser, you should see the same reaction time task. 
 
 Let's look at each change.
 
@@ -366,7 +366,7 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/jsPsych-in-Qualtrics/blob/master/rt-task/demo-simple-rt-task-qualtrics.js) contains several changes from `demo-simple-rt-task-transformed-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
+The `demo-simple-rt-task-qualtrics.js` file in [this GitHub repository](https://github.com/kywch/Simple-RT-Task/blob/master/demo-simple-rt-task.html) contains several changes from `demo-simple-rt-task-transformed-with-display-element.html` and can be direclty copy-pasted into the Qualtrics Question JavaScript Editor.
 
 By separating the experiment-related code from the operation-related code, converting the html file to Qualtrics JavaScript function is pretty much similar to [the Hello-World example](hello-world.md#second-transformation-qualtricsjs).
 
@@ -433,7 +433,7 @@ The main experiment codes are wrapped in the `initExp` function to make sure it 
 
 ### Change 5: Summarizing and save the results to Qualtrics
 
-[The original jsPsych tutorial](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
+[The original jsPsych v6.3 tutorial](https://www.jspsych.org/6.3/tutorials/rt-task/#part-11-data-aggregation) shows you how you can process and summarize the experiment results online. **Wouldn't it be great if your experiment results are directly included in your Qualtrics data?** 
 
 Well, you can actually summarize the results online and save those results in [Qualtrics' Embedded Data](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) using the [setEmbeddedData](https://s.qualtrics.com/WRAPI/QuestionAPI/classes/Qualtrics%20JavaScript%20Question%20API.html#method_setEmbeddedData) function.
 
@@ -482,9 +482,7 @@ Let's log in to Qualtrics and take a look at each step.
 
 ### Step 1. Create a new Qualtrics project and then a new question
 
-This tutorial assumes that readers are much more familiar with Qualtrics. For Qualtrics tutorial, there are other excellent tutorials available like [this Qualtrics User Guide](https://www.unthsc.edu/center-for-innovative-learning/qualtrics-user-guide/).
-
-To continue, please create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
+Create a new Qualtrics project. Then, create a new question and (1) change its format to **Text/Graphic**.
 
 ![Add JavaScript to a Qualtrics question](img/hello-world-qualtrics-Step1_add_javascript_to_question.jpg)
 
@@ -586,9 +584,6 @@ Publish the survey by following [this Qualtrics tutorial](https://www.qualtrics.
 
 ---
 
-## Do you also want to save the trial-by-trial data?
+## Do you want to save the trial-by-trial data?
 
-I describe two ways for saving the experiment files in these tutorials. 
-
-1. [Saving data to a web server using PHP](save-php.md)
-2. [Saving data to your Dropbox folder](save-dropbox.md)
+Then, you need a server that can receive your data. See the tutorial [Saving data to a web server using PHP](save-php.md).
