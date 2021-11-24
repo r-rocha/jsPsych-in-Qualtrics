@@ -1,6 +1,6 @@
 
 *The original version of this tutorial is hosted at <a href="https://github.com/janakl4us/flanker/blob/master/tutorial.md">https://github.com/janakl4us/flanker</a>. 
-This tutorial has been updated to be in sync with the `demo-flanker.html` in [the jsPsych repository](https://github.com/jspsych/jsPsych/blob/master/examples/demo-flanker.html).*
+This tutorial has been updated to be in sync with the `demo-flanker.html` from jsPsych v6.x.*
 
 # Eriksen Flanker Task
 
@@ -12,8 +12,8 @@ feedback on the participant's performance at the end of the experiment.
 ## Part 1: Setting up the HTML file
 
 As always, we need to create an HTML file which references the Javascript plugins and CSS required. 
-For this experiment, we will only use the [jspsych-html-keyboard-response](https://github.com/jspsych/jsPsych/blob/master/plugins/jspsych-html-keyboard-response.js)
- and [jspsych-image-keyboard-response](https://github.com/jspsych/jsPsych/blob/master/plugins/jspsych-image-keyboard-response.js)
+For this experiment, we will only use the [jspsych-html-keyboard-response](https://github.com/kywch/jsPsych/blob/master/plugins/jspsych-html-keyboard-response.js)
+ and [jspsych-image-keyboard-response](https://github.com/kywch/jsPsych/blob/master/plugins/jspsych-image-keyboard-response.js)
 plugins which can be specified in the `<head>` of the file.
 
 ```html
@@ -80,7 +80,7 @@ jsPsych.init({
 );
 ```
 
-If you are unsure about any of this, go back to the [tutorial for running a simple reaction time task](https://www.jspsych.org/tutorials/rt-task/).
+If you are unsure about any of this, go back to the [tutorial for running a simple reaction time task](https://www.jspsych.org/6.3/tutorials/rt-task/).
 
 ### The code so far:
 
@@ -182,9 +182,9 @@ As you can see, there is a LOT packed in here.
 * `trial_duration`: We want each stimulus to be presented for 1500 ms at most, which should be defined here in ms. 
 * `stimulus` and `data`: The `test_stimuli` defined above is referenced in the `timeline_variables`, 
 and the `stimulus` and `data` defined in the `test_stimuli` are fed into the plugin via the `jsPsych.timelineVariable` function 
-(see [the tutorial](https://www.jspsych.org/overview/timeline/#timeline-variables)).
+(see [the tutorial](https://www.jspsych.org/6.3/overview/timeline/#timeline-variables)).
 * `sample`: Now that we have defined our stimuli, we want them to be displayed and repeated in a random order. 
-This can easily be done via `sample` (see [the jsPsych tutorial on sampling](https://www.jspsych.org/overview/timeline/#repeating-each-trial-a-fixed-number-of-times-in-a-random-order)). This timeline contains 4 repetitions (as defined in `reps_per_trial_type`) of 4 different trials types (as defined in `test_stimuli`), resulting in 16 trials.
+This can easily be done via `sample` (see [the jsPsych tutorial on sampling](https://www.jspsych.org/6.3/overview/timeline/#repeating-each-trial-a-fixed-number-of-times-in-a-random-order)). This timeline contains 4 repetitions (as defined in `reps_per_trial_type`) of 4 different trials types (as defined in `test_stimuli`), resulting in 16 trials.
 * `on_finish`: When a trial finishes, its `data` is passed to be examined right away. 
 Here, the code compares the response (`data.key_press` and `data.rt`) with the stimulus (`data.direction`) and records `data.correct` variable.
 For example, whenever a congruent stimulus was displayed and the left arrow key was pressed <em>or</em> 
@@ -338,8 +338,8 @@ timeline.push(test);
 
 Running the experiment now will provide you with a welcome message, instructions, and 16 trials. We would like to give
 the participants feedback about their performance at the end of the experiment. 
-[The jsPsych Reaction Time task also does this](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation),
-and the tutorial explains in detail in the [Part 11: Data aggregation](https://www.jspsych.org/tutorials/rt-task/#part-11-data-aggregation).
+[The jsPsych Reaction Time task also does this](https://www.jspsych.org/6.3/tutorials/rt-task/#part-11-data-aggregation),
+and the tutorial explains in detail in the [Part 11: Data aggregation](https://www.jspsych.org/6.3/tutorials/rt-task/#part-11-data-aggregation).
 
 This debriefing block shows the accuracy, mean RT for congruent trials, and mean RT for incongruent trials.
 
