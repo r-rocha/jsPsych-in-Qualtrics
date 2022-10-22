@@ -38,7 +38,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     /* Change 3: Appending the display_stage Div using jQuery */
     // jQuery is loaded in Qualtrics by default
-    jQuery("<div id = 'display_stage_background'></div>").appendTo('body');
+    jQuery("<div id = 'display_stage_background'><label>Your name:</label></div>").appendTo('body');
     jQuery("<div id = 'display_stage'></div>").appendTo('body');
 
     /* Change 4: Wrapping jsPsych.init() in a function */
