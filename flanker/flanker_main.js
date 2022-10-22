@@ -58,7 +58,7 @@ var test = {
     timeline: [{
         type: 'image-keyboard-response',
         choices: [37, 39],
-        trial_duration: 2000,
+        trial_duration: 1500,
         stimulus: jsPsych.timelineVariable('stimulus'),
         data: jsPsych.timelineVariable('data'),
         on_finish: function (data) {
