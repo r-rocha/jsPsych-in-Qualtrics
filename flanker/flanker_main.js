@@ -13,8 +13,7 @@ var welcome = {
 
 /*set up instructions block*/
 var instructions = {
-    // type: "html-keyboard-response",
-    type: "html-button-response",
+    type: "html-keyboard-response",
     stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>" +
         "<img src='" + repo_site + "img/inc1.png'></img>" +
         "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>" +
